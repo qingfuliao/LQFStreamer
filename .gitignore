@@ -1,0 +1,40 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.d
+
+# Precompiled Headers
+*.gch
+*.pch
+*.VC.db
+
+# Compiled Dynamic libraries
+#*.dylib
+#*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+#*.lib
+
+# media files
+*.aac
+*.h264
+*.mp4
+
+# Executables
+#*.exe
+*.out
+*.app
+/Debug/
+/x64/
+/.vs/
+/Streamer/Debug/
+/Streamer/x64/
+*.DS_Store

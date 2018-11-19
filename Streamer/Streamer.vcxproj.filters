@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="capture">
+      <UniqueIdentifier>{55081683-c837-428e-9717-45eb6640c5c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="codec">
+      <UniqueIdentifier>{28b1ff93-5d58-47a5-a1b7-da6d421f4fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtmp">
+      <UniqueIdentifier>{27e9b24a-9fdc-4aa6-89e3-041b74064bae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{257355cb-7cd7-4409-9386-d1b07652c6c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{23d422f8-7763-4de7-9159-dd70342abd0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{398d3d4a-4d6f-4d71-b93e-0c660c48def6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="container">
+      <UniqueIdentifier>{aceb3370-a012-4288-9c42-876b7a112310}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioCapture.cpp">
+      <Filter>capture</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoCapture.cpp">
+      <Filter>capture</Filter>
+    </ClCompile>
+    <ClCompile Include="AACEncoder.cpp">
+      <Filter>codec</Filter>
+    </ClCompile>
+    <ClCompile Include="LogUtil.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeUtil.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="X264Encoder.cpp">
+      <Filter>codec</Filter>
+    </ClCompile>
+    <ClCompile Include="H264RTMPPackager.cpp">
+      <Filter>rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="RtmpPusher.cpp">
+      <Filter>rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AACRTMPPackager.cpp">
+      <Filter>rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaCenter.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Media.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="Pusher.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="RecoderPusher.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="MP4Muxer.cpp">
+      <Filter>container</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AudioCapture.h">
+      <Filter>capture</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoCapture.h">
+      <Filter>capture</Filter>
+    </ClInclude>
+    <ClInclude Include="AACEncoder.h">
+      <Filter>codec</Filter>
+    </ClInclude>
+    <ClInclude Include="X264Encoder.h">
+      <Filter>codec</Filter>
+    </ClInclude>
+    <ClInclude Include="LogUtil.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeUtil.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="H264RTMPPackager.h">
+      <Filter>rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTMPPackager.h">
+      <Filter>rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="RtmpPusher.h">
+      <Filter>rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="Media.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AACRTMPPackager.h">
+      <Filter>rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaCenter.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Pusher.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="RecoderPusher.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="MP4Muxer.h">
+      <Filter>container</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
