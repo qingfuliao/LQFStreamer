@@ -9,6 +9,7 @@
 *.gch
 *.pch
 *.VC.db
+*.VC.VC.opendb
 
 # Compiled Dynamic libraries
 #*.dylib
@@ -27,6 +28,9 @@
 *.aac
 *.h264
 *.mp4
+
+# log files
+*.txt
 
 # Executables
 #*.exe

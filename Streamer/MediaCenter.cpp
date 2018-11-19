@@ -407,10 +407,8 @@ void MediaCenter::PushVideo()
 				if (current_time - start_time > 6000)
 				{
 					start_time = current_time;
-					LogDebug("fps:%d,bitrate:%0.2fkbps, aq:%d, vq:%d", fps / 6,
-						(float)(size_clac * 8 / 1024.0 / 6),
-						rtmp_pusher_->GetAudioCachePackets(),
-						rtmp_pusher_->GetVideoCachePackets());
+					LogDebug("fps:%d,bitrate:%0.2fkbps", fps / 6,
+						(float)(size_clac * 8 / 1024.0 / 6));
 					size_clac = 0;
 					fps = 0;
 				}

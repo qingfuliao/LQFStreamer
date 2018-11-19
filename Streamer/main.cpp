@@ -60,7 +60,7 @@ int main_rtmp()
 	encode_config.profile = H264_PROFILE_BASELINE;
 	media_center.ConfigVideoEncoder(encode_config);
 	media_center.InitAVTimer();
-	media_center.StartRtmpPush(RTMP_URL, 5);
+	//media_center.StartRtmpPush(RTMP_URL, 5);
 	media_center.StartRecord("record.mp4");
 	if (!media_center.StartAudio())
 	{
@@ -89,7 +89,7 @@ int main_rtmp()
 	LogDebug("StopVideo");
 	media_center.StopVideo();
 	LogDebug("StopRtmpPush");
-	media_center.StopRtmpPush();
+//	media_center.StopRtmpPush();
 	LogDebug("StopRecord");
 	media_center.StopRecord();
 	LogDebug("TimerManager::GetInstance()->Stop();");

@@ -8,7 +8,7 @@
 - 目前只支持Windows平台，后续再扩展到Linux平台
 
 ## 编译平台
-visual studio 2015 + win10 ，目前只编译了win32的lib或dll，所以请使用win32 debug模式进行编译。
+visual studio 2015 + win10 ，目前只编译了win32的lib或dll，所以请使用**x86 debug**模式进行编译。
 
 ## 集成的第三方库
 - fdk-aac  AAC编码库

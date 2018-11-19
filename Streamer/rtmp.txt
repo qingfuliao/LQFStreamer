@@ -1,1 +1,22 @@
-2018-11-19 16:08:40 - [293] []MediaCenter::StartRtmpPush() -  Entry...  
+2018-11-19 16:40:38 - [908] []MediaCenter::StartRecord() -  Entry...  
+2018-11-19 16:40:38 - [921] []MediaCenter::StartRecord() -  Exit...  
+2018-11-19 16:40:40 - [371] []X264Encoder::UpdateEncoderInfo() - sps size = 28 
+2018-11-19 16:40:40 - [377] []X264Encoder::UpdateEncoderInfo() - pps size = 8 
+2018-11-19 16:40:40 - [383] []X264Encoder::UpdateEncoderInfo() - sei size = 646 
+2018-11-19 16:40:40 - [394] []MediaCenter::PushVideo() - into 
+2018-11-19 16:40:40 - [403] []MediaCenter::PushVideo() - vid_thread_req_abort_ = 0 
+2018-11-19 16:40:40 - [925] []MP4Muxer::WriteH264Data() - frame_count = 0, sps frame, len = 24
+ 
+2018-11-19 16:40:40 - [931] []MP4Muxer::WriteH264Data() - frame_count = 0, pps frame, len = 4
+ 
+2018-11-19 16:40:46 - [423] []MediaCenter::PushVideo() - fps:14,bitrate:1782.48kbps 
+2018-11-19 16:40:50 - [399] []main_rtmp() - StopAudio 
+2018-11-19 16:40:50 - [437] []main_rtmp() - StopVideo 
+2018-11-19 16:40:50 - [487] []main_rtmp() - StopRtmpPush 
+2018-11-19 16:40:50 - [490] []main_rtmp() - StopRecord 
+2018-11-19 16:40:50 - [494] []MediaCenter::StopRecord() -  Entry...  
+2018-11-19 16:40:50 - [513] []MP4Muxer::Stop() - MP4Close ok 
+2018-11-19 16:40:50 - [518] []MP4Muxer::Stop() - file has been close 
+2018-11-19 16:40:50 - [521] []MediaCenter::StopRecord() -  Exit...  
+2018-11-19 16:40:50 - [525] []main_rtmp() - TimerManager::GetInstance()->Stop(); 
+2018-11-19 16:40:50 - [536] []main_rtmp() - LogDeinit 
