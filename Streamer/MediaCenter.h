@@ -5,6 +5,7 @@
 #include "X264Encoder.h"
 #include "VideoCapture.h"
 #include "RtmpPusher.h"
+#include "RTPStream.h"
 #include "RecoderPusher.h"
 #include "Media.h"
 using namespace std;
@@ -23,6 +24,10 @@ public:
 
 	bool StartRecord(string url);
 	bool StopRecord(void);
+
+	bool StartRtpPush(RTP_CONNECT_PARAM_T & video_param,
+		RTP_CONNECT_PARAM_T & audio_param);
+	bool StopRtpPush(void);
 
 	bool ConfigAudioEncoder(AudioEncoderConfig &config);	// 配置audio编码器参数
 	void GetAudioEncoderConfig(AudioEncoderConfig &config);	// 获取audio编码器参数
@@ -82,4 +87,7 @@ private:
 	std::shared_ptr<RecoderPusher> recod_pusher_ = nullptr;
 	string recod_push_url_;		// 推流链接
 	bool record_push_enable_ = false;			// 是否推流中
+
+	// RTP
+	std::shared_ptr<RTPStream> rtp_pusher_ = nullptr;
 };

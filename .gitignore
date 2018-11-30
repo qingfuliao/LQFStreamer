@@ -41,4 +41,5 @@
 /.vs/
 /Streamer/Debug/
 /Streamer/x64/
+/MediaPlayer/Debug
 *.DS_Store

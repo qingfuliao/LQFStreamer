@@ -1,0 +1,466 @@
+#include "RtpH264Pack.h"
+#include <string.h>
+#include <stdio.h>
+#include "LogUtil.h"
+RTPH264Pack::RTPH264Pack(const uint32_t ssrc,
+	const uint8_t payload_type,
+	const uint16_t rtp_packet_max_size):
+	rtp_packet_max_size_(rtp_packet_max_size)
+{
+	if (rtp_packet_max_size_ > RTP_PACKET_MAX_SIZE)
+	{
+		rtp_packet_max_size_ = RTP_PACKET_MAX_SIZE;		// 最大限制
+	}
+	memset(&rtp_info_, 0, sizeof(rtp_info_));
+
+	rtp_info_.rtp_hdr.set_type(payload_type);
+	rtp_info_.rtp_hdr.set_ssrc(ssrc);
+	rtp_info_.rtp_hdr.set_version(RTP_VERSION);
+	rtp_info_.rtp_hdr.set_seq_num(0);
+}
+
+RTPH264Pack::~RTPH264Pack()
+{
+}
+
+//传入Set的数据必须是一个完整的NAL,起始码为0x00000001。
+//起始码之前至少预留10个字节，以避免内存COPY操作。
+//打包完成后，原缓冲区内的数据被破坏。
+bool RTPH264Pack::Pack(uint8_t * p_nal_buf, uint32_t nal_buf_size, uint32_t timestamp, bool end_of_frame)
+{
+	uint32_t startcode = StartCode(p_nal_buf);
+
+	if (startcode != 0x01000000)
+	{
+		return false;
+	}
+
+	if (nal_buf_size < (4 + 1))	// 小于startcode 4字节 + nal type 1字节
+	{
+		return false;		
+	}
+
+	rtp_info_.nal.start = p_nal_buf;
+	rtp_info_.nal.size = nal_buf_size;
+	rtp_info_.nal.b_end_of_frame = end_of_frame;
+	rtp_info_.nal.type = rtp_info_.nal.start[4];
+	rtp_info_.nal.end = rtp_info_.nal.start + rtp_info_.nal.size;
+
+	rtp_info_.rtp_hdr.timestamp = timestamp;		// 时间戳
+
+	rtp_info_.nal.start += 4;	// skip the syncword
+
+	// -4为start code长度，-1为nal type长度
+	if ((rtp_info_.nal.size - 4 - 1 + RTP_HEADER_LEN) > rtp_packet_max_size_)
+	{
+		rtp_info_.FU_flag = true;		// 此时需要划分多个RTP包
+		rtp_info_.s_bit = 1;
+		rtp_info_.e_bit = 0;
+		// 被划分RTP包时不需要再传 NAL HEADER，用FU Header代替
+		rtp_info_.nal.start += 1;	// skip NAL header	
+	}
+	else
+	{
+		rtp_info_.FU_flag = false;	// 不需要划分RTP包
+		rtp_info_.s_bit = rtp_info_.e_bit = 0;
+	}
+
+	rtp_info_.start = rtp_info_.end = rtp_info_.nal.start;
+	b_begin_nal_ = true;
+
+	return true;
+}
+
+uint8_t * RTPH264Pack::GetPacket(int &out_packet_size)
+{
+	if (rtp_info_.end == rtp_info_.nal.end)
+	{
+		out_packet_size = 0;		// 数据已经读取完毕了
+		return NULL;
+	}
+
+	if (b_begin_nal_)
+	{
+		b_begin_nal_ = false;
+	}
+	else
+	{
+		rtp_info_.start = rtp_info_.end;	// continue with the next RTP-FU packet
+	}
+
+	int bytes_left = rtp_info_.nal.end - rtp_info_.start;
+	int max_size = rtp_packet_max_size_ - RTP_HEADER_LEN;	// sizeof(basic rtp header) == 12 bytes
+	if (rtp_info_.FU_flag)
+		max_size -= 2;		// 一字节为 FU indicator，另一字节为 FU header
+
+	if (bytes_left > max_size)	
+	{
+		rtp_info_.end = rtp_info_.start + max_size;	// limit RTP packet size to max_size bytes
+	}
+	else
+	{
+		rtp_info_.end = rtp_info_.start + bytes_left;
+	}
+
+	if (rtp_info_.FU_flag)
+	{	// multiple packet NAL slice
+		if (rtp_info_.end == rtp_info_.nal.end)		// 说明已经是最后一个FU 分片
+		{
+			rtp_info_.e_bit = 1;	// 当设置成1, 结束位指示分片NAL单元的结束
+		}
+	}
+
+	// 比较是否是完整一帧图像数据的结束
+	rtp_info_.rtp_hdr.marker = rtp_info_.nal.b_end_of_frame ? 1 : 0; // should be set at EofFrame
+	if (rtp_info_.FU_flag && !rtp_info_.e_bit)	// 当被分片时还要考虑  e_bit
+	{
+		rtp_info_.rtp_hdr.marker = 0;
+	}
+	
+
+	rtp_info_.rtp_hdr.sequencenumber++;		// 发送序号线性增长
+	int type = rtp_info_.nal.type;
+	if (/*0x65 == type || */0x67 == type || 0x68 == type)
+	{
+		LogDebug("type:0x%x, seq;%d", type, rtp_info_.rtp_hdr.sequencenumber);
+	}
+	// 开始封装RTP packet
+	uint8_t *cp = rtp_info_.start;	//获取
+	cp -= (rtp_info_.FU_flag ? 14 : 12);
+	rtp_info_.p_rtp = cp;
+
+	uint8_t *cp2 = (uint8_t *)&rtp_info_.rtp_hdr;
+	cp[0] = cp2[0];
+	cp[1] = cp2[1];
+
+	cp[2] = (rtp_info_.rtp_hdr.sequencenumber >> 8) & 0xff;	// 先高八位
+	cp[3] = rtp_info_.rtp_hdr.sequencenumber & 0xff;
+
+	cp[4] = (rtp_info_.rtp_hdr.timestamp >> 24) & 0xff;	// 先高八位
+	cp[5] = (rtp_info_.rtp_hdr.timestamp >> 16) & 0xff;
+	cp[6] = (rtp_info_.rtp_hdr.timestamp >> 8) & 0xff;
+	cp[7] = rtp_info_.rtp_hdr.timestamp & 0xff;
+
+	cp[8] = (rtp_info_.rtp_hdr.ssrc >> 24) & 0xff;
+	cp[9] = (rtp_info_.rtp_hdr.ssrc >> 16) & 0xff;
+	cp[10] = (rtp_info_.rtp_hdr.ssrc >> 8) & 0xff;
+	cp[11] = rtp_info_.rtp_hdr.ssrc & 0xff;
+	rtp_info_.hdr_len = RTP_HEADER_LEN;
+	/*!
+	* /n The FU indicator octet has the following format:
+	* /n
+	* /n      +---------------+
+	* /n MSB  |0|1|2|3|4|5|6|7|  LSB
+	* /n      +-+-+-+-+-+-+-+-+
+	* /n      |F|NRI|  Type   |
+	* /n      +---------------+
+	* /n
+	* /n The FU header has the following format:
+	* /n
+	* /n      +---------------+
+	* /n      |0|1|2|3|4|5|6|7|
+	* /n      +-+-+-+-+-+-+-+-+
+	* /n      |S|E|R|  Type   |
+	* /n      +---------------+
+	*/
+	if (rtp_info_.FU_flag)
+	{
+		// FU indicator  F|NRI|Type
+		cp[RTP_HEADER_LEN] = (rtp_info_.nal.type & 0xe0) | 28;	//Type is 28 for FU_A
+													//FU header		S|E|R|Type
+		cp[13] = (rtp_info_.s_bit << 7) | (rtp_info_.e_bit << 6) | (rtp_info_.nal.type & 0x1f); //R = 0, must be ignored by receiver
+
+		rtp_info_.s_bit = rtp_info_.e_bit = 0;	// 重置
+		rtp_info_.hdr_len = 14;
+	}
+	rtp_info_.start = &cp[rtp_info_.hdr_len];	// new start of payload
+
+	out_packet_size = rtp_info_.hdr_len + (rtp_info_.end - rtp_info_.start);
+	return rtp_info_.p_rtp;
+}
+
+RTPH264Pack::RTP_INFO_T RTPH264Pack::GetRtpInfo() const
+{
+	return rtp_info_;
+}
+
+void RTPH264Pack::SetRtpInfo(const RTP_INFO_T & RTP_Info)
+{
+	rtp_info_ = RTP_Info;
+}
+
+unsigned int RTPH264Pack::StartCode(uint8_t * cp)
+{
+	unsigned int d32;
+	d32 = cp[3];
+	d32 <<= 8;
+	d32 |= cp[2];
+	d32 <<= 8;
+	d32 |= cp[1];
+	d32 <<= 8;
+	d32 |= cp[0];
+	return d32;
+}
+
+
+RTPH264Unpack::RTPH264Unpack(uint8_t H264PAYLOADTYPE)
+	: b_sps_found_(false)
+	, b_found_key_frame_(false)
+	, b_pre_frame_finish_(false)
+	, seq_num_(0)
+	, ssrc_(0)
+	, resync_(true)
+{
+	receive_buf_data_ = new uint8_t[BUF_SIZE];
+
+	h264_playload_type_ = H264PAYLOADTYPE;
+	receive_buf_end_ = receive_buf_data_ + BUF_SIZE;
+	receive_buf_start_ = receive_buf_data_;
+	cur_receive_size_ = 0;
+}
+
+
+RTPH264Unpack::~RTPH264Unpack(void)
+{
+	delete[] receive_buf_data_;
+}
+
+//p_buf为H264 RTP视频数据包，buf_size为RTP视频数据包字节长度，out_size为输出视频数据帧字节长度。
+//返回值为指向视频数据帧的指针。输入数据可能被破坏。
+/**
+ * 1. 分析RTP Header
+ * 2. 检测版本是否一致
+ * 3. 分析SSRC(Synchronization source)是否一致，如果不一致则重置
+ * 4. 分析PPS SPS是否已经找到
+ * 5. 分析I帧是否已经找到
+ * 6. 处理其他帧类型的数据（出去SPS/PPS/I帧的）
+ */
+uint8_t *RTPH264Unpack::ParseRtpPacket(uint8_t * p_buf, uint16_t buf_size, int &out_size, uint32_t &timestamp)
+{
+	if (buf_size <= RTP_HEADER_LEN)
+		return NULL;
+	memset(&rtp_header_, 0, RTP_HEADER_LEN);
+	uint8_t *cp = (uint8_t *)&rtp_header_;
+
+	cp[0] = p_buf[0];
+	cp[1] = p_buf[1];
+	
+	rtp_header_.seq = p_buf[2];
+	rtp_header_.seq <<= 8;
+	rtp_header_.seq |= p_buf[3];
+	
+	rtp_header_.ts = p_buf[4];
+	rtp_header_.ts <<= 8;
+	rtp_header_.ts |= p_buf[5];
+	rtp_header_.ts <<= 8;
+	rtp_header_.ts |= p_buf[6];
+	rtp_header_.ts <<= 8;
+	rtp_header_.ts |= p_buf[7];
+
+	rtp_header_.ssrc = p_buf[8];
+	rtp_header_.ssrc <<= 8;
+	rtp_header_.ssrc |= p_buf[9];
+	rtp_header_.ssrc <<= 8;
+	rtp_header_.ssrc |= p_buf[10];
+	rtp_header_.ssrc <<= 8;
+	rtp_header_.ssrc |= p_buf[11];
+
+	// 单纯的pps sps帧，不需要检测之前的一帧是否已经接收完成
+
+	
+	
+
+	// Check the RTP version number (it should be 2):
+	// 2 比特，此域定义了 RTP 的版本。此协议定义的版本是 2。
+	if (rtp_header_.v != RTP_VERSION)
+	{
+		//LogError("rtp_header_.v != RTP_VERSION");
+		return NULL;
+	}
+
+	if (ssrc_ != rtp_header_.ssrc)		// 不相等时说明流有切换，需要重新sync
+	{
+		ssrc_ = rtp_header_.ssrc;
+		LogDebug("ssrc change....");
+		resetPacket();
+	}
+
+	uint8_t *p_payload = p_buf + RTP_HEADER_LEN;
+	int32_t payload_size = buf_size - RTP_HEADER_LEN;
+
+
+	// Skip over any CSRC identifiers in the header:
+	if (rtp_header_.cc)//4 比特，CSRC 计数包含了跟在固定头后面 CSRC 识别符的数目。
+	{
+		uint32_t cc = rtp_header_.cc * 4;	// 一个CSRC占用4个字节
+		if (payload_size < cc)
+		{
+			LogError("payload_size < cc");
+			return NULL;
+		}
+		payload_size -= cc;
+		p_payload += cc;		// 跳过CSRC
+	}
+
+	// Check for (& ignore) any RTP header extension
+	if (rtp_header_.x)	// 1 比特，若设置扩展比特,固定头(仅)后面跟随一个头扩展。
+	{
+		if (payload_size < 4)
+		{
+			LogError("payload_size < cc");
+			return NULL;
+		}
+		payload_size -= 4;
+		p_payload += 2;
+		uint32_t rtp_ext_size = p_payload[0];
+		rtp_ext_size <<= 8;
+		rtp_ext_size |= p_payload[1];
+		p_payload += 2;
+		rtp_ext_size *= 4;
+		if (payload_size < rtp_ext_size)
+			return NULL;
+		payload_size -= rtp_ext_size;
+		p_payload += rtp_ext_size;
+	}
+
+	// Discard any padding uint8_ts:
+	if (rtp_header_.p)
+	{
+		if (payload_size == 0)
+		{
+			LogError("payload_size == 0");
+			return NULL;
+		}
+		uint32_t padding = p_payload[payload_size - 1];
+		if (payload_size < padding)
+		{
+			LogError("payload_size < padding");
+			return NULL;
+		}
+		payload_size -= padding;
+	}
+
+	int payload_type = p_payload[0] & 0x1f;
+	int nal_type = payload_type;
+	if (RTP_H264_FU_A == nal_type) // FU_A
+	{
+		if (payload_size < 2)
+		{
+			LogError("payload_size < 2");
+			return NULL;
+		}
+		nal_type = p_payload[1] & 0x1f;
+	}
+
+	if (RTP_H264_SPS == nal_type)	// SPS
+	{
+		//LogDebug("nal_type =%d", nal_type);
+		b_sps_found_ = true;
+	}
+	if (!b_sps_found_)		// 需要等待找到SPS包，否则无法解码
+	{
+		LogDebug("wait found sps frame, seq:%d", rtp_header_.seq);
+		return NULL;
+	}
+	if (nal_type == 0x07 || nal_type == 0x08) // SPS PPS
+	{
+		seq_num_ = rtp_header_.seq;		// 更新sequence num
+		p_payload -= 4;
+		*((uint32_t*)(p_payload)) = 0x01000000;
+		out_size = payload_size + 4;
+		LogDebug("nal_type:%d, out_size:%d, seq:%d", nal_type, out_size, seq_num_);
+		b_pre_frame_finish_ = true;		// 
+		return p_payload;
+	}
+
+	if (rtp_header_.seq != (uint16_t)(seq_num_ + 1)) // lost packet
+	{
+// 		b_pre_frame_finish_ = false;
+// 		resetPacket();
+ 		LogError("rtp packet, preseq:%d, curseq:%d", seq_num_, rtp_header_.seq);
+// 		return NULL;
+	}
+	seq_num_ = rtp_header_.seq;
+
+	
+	if (payload_type != RTP_H264_FU_A) // whole NAL
+	{
+		*((uint32_t*)(receive_buf_start_)) = 0x01000000;
+		receive_buf_start_ += 4;
+		cur_receive_size_ += 4;
+	}
+	else // FU_A
+	{
+		if (p_payload[1] & 0x80) // FU_A start
+		{
+			*((uint32_t*)(receive_buf_start_)) = 0x01000000;
+			receive_buf_start_ += 4;
+			cur_receive_size_ += 4;
+
+			p_payload[1] = (p_payload[0] & 0xE0) | nal_type;
+
+			p_payload += 1;
+			payload_size -= 1;
+		}
+		else
+		{
+			p_payload += 2;		// 跳过 FU indicator 和 header
+			payload_size -= 2;
+		}
+	}
+
+	if (receive_buf_start_ + payload_size < receive_buf_end_)
+	{
+		memcpy(receive_buf_start_, p_payload, payload_size);
+		cur_receive_size_ += payload_size;
+		receive_buf_start_ += payload_size;
+	}
+	else // memory overflow
+	{
+		LogError("memory overflow");
+		resetPacket();
+		return NULL;
+	}
+
+	if (rtp_header_.m) // frame end || nal_type == 5
+	{
+		out_size = cur_receive_size_;
+		receive_buf_start_ = receive_buf_data_;
+		timestamp = rtp_header_.ts;
+		cur_receive_size_ = 0;
+		if ((RTP_H264_IDR  == nal_type) && b_pre_frame_finish_) // KEY FRAME
+		{
+			b_found_key_frame_ = true;
+			LogDebug("b_found_key_frame_ = %d, seq:%d", b_found_key_frame_, seq_num_);
+		}
+		else
+		{
+			b_pre_frame_finish_ = true;
+			if (!b_found_key_frame_)	// I帧还没有找到则需要继续重置哦
+			{
+				// 如果此时还没有找到，则重新sync pps sps I帧
+				resetPacket();		// 新组的一帧不是I帧，则需要继续
+				LogError(" nal_type = 0x%x", nal_type);
+				return NULL;
+			}
+		}
+		
+		return receive_buf_data_;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+
+
+void RTPH264Unpack::resetPacket()
+{
+// 	b_sps_found_ = false;
+	resync_ = true;
+	b_found_key_frame_ = false;
+	m_bAssemblingFrame = false;
+	receive_buf_start_ = receive_buf_data_;
+	cur_receive_size_ = 0;
+}

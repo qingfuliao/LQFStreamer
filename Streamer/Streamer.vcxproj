@@ -29,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -74,13 +74,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\thirdlib\fdk-aac\include;..\thirdlib\librtmp\include;..\thirdlib\screen_capture\include;..\thirdlib\x264\include;..\thirdlib\yuv\include;..\thirdlib\portaudio\include;..\thirdlib\mp4v2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>..\thirdlib\fdk-aac\include;..\thirdlib\librtmp\include;..\thirdlib\screen_capture\include;..\thirdlib\x264\include;..\thirdlib\yuv\include;..\thirdlib\portaudio\include;..\thirdlib\mp4v2\include;..\thirdlib\jrtplib\jrtp;..\thirdlib\jrtplib\jthread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_CONSOLE;WIN32;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>..\thirdlib\fdk-aac\lib;..\thirdlib\librtmp\lib;..\thirdlib\screen_capture\lib\debug;..\thirdlib\x264\lib;..\thirdlib\yuv\lib;..\thirdlib\portaudio\lib\debug;..\thirdlib\mp4v2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fdk-aac.lib;librtmp.lib;screencapture.lib;libx264.lib;libyuv.lib;portaudio_static_x86.lib;libmp4v2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\thirdlib\fdk-aac\lib;..\thirdlib\librtmp\lib;..\thirdlib\screen_capture\lib\debug;..\thirdlib\x264\lib;..\thirdlib\yuv\lib;..\thirdlib\portaudio\lib\debug;..\thirdlib\mp4v2\lib;..\thirdlib\jrtplib\jthread;..\thirdlib\jrtplib\jrtp;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fdk-aac.lib;librtmp.lib;screencapture.lib;libx264.lib;libyuv.lib;portaudio_static_x86.lib;libmp4v2.lib;Ws2_32.lib;delayimp.lib;Winmm.lib;qwave.lib;jrtplib_d.lib;jthread_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,6 +130,9 @@
     <ClCompile Include="Pusher.cpp" />
     <ClCompile Include="RecoderPusher.cpp" />
     <ClCompile Include="RtmpPusher.cpp" />
+    <ClCompile Include="RtpH264Pack.cpp" />
+    <ClCompile Include="RTPStream.cpp" />
+    <ClCompile Include="RtspPusher.cpp" />
     <ClCompile Include="Thread.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="TimeUtil.cpp" />
@@ -148,6 +152,10 @@
     <ClInclude Include="RecoderPusher.h" />
     <ClInclude Include="RTMPPackager.h" />
     <ClInclude Include="RtmpPusher.h" />
+    <ClInclude Include="RTP.h" />
+    <ClInclude Include="RtpH264Pack.h" />
+    <ClInclude Include="RTPStream.h" />
+    <ClInclude Include="RtspPusher.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="TimerManager.h" />
     <ClInclude Include="TimeUtil.h" />

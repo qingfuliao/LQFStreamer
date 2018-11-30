@@ -89,6 +89,22 @@ bool MediaCenter::StopRecord(void)
 	return true;
 }
 
+bool MediaCenter::StartRtpPush(RTP_CONNECT_PARAM_T & video_param,
+	RTP_CONNECT_PARAM_T & audio_param)
+{
+	rtp_pusher_.reset(new RTPStream());
+	if (!rtp_pusher_->Init(video_param, audio_param))
+	{
+		return false;
+	}
+	return rtp_pusher_->Connect();
+}
+
+bool MediaCenter::StopRtpPush(void)
+{
+	return rtp_pusher_->Disconnect();
+}
+
 bool MediaCenter::ConfigAudioEncoder(AudioEncoderConfig & config)
 {
 	audio_encoder_config_ = config;
@@ -343,12 +359,8 @@ void MediaCenter::PushVideo()
 		RGBAFrame frame(0);
 		if (video_capture_->GetFrame(frame))	
 		{
-			// 确定是否需要插入sps/pps/sei
-			if (b_trigger_sps_pps)
-			{
-				if(pushVideoMetadata())
-					b_trigger_sps_pps = false;		// 每次
-			}
+			
+
 #if 0
 			if (++frame_count % 500 == 0)
 			{
@@ -379,6 +391,14 @@ void MediaCenter::PushVideo()
 			if (ret == H264_ENCODE_GOT_PACKET)
 			{
 				//LogDebug("pkt_typ = %d",packet.pkt_type);
+				// 确定是否需要插入sps/pps/sei
+				if (MD_PICTURE_TYPE_I == packet.pkt_type
+					|| MD_PICTURE_TYPE_IDR == packet.pkt_type)
+				{
+					LogDebug("pushVideoMetadata");
+					pushVideoMetadata();
+				}
+
 				LQF::AVPacket video_packet(packet.size);
 				video_packet.size = packet.size;
 				video_packet.type = VIDEO_PACKET;				
@@ -400,6 +420,13 @@ void MediaCenter::PushVideo()
 					}
 				}
 
+				if (rtp_pusher_)
+				{
+					if (!rtp_pusher_->PushPacket(video_packet))
+					{
+						//LogError("rtp push video packet failed");
+					}
+				}
 				#if 1
 				fps++;
 				size_clac += packet.size;
@@ -491,6 +518,25 @@ bool MediaCenter::pushVideoMetadata()
 			LogError("record push sei packet failed");
 			ret = false;
 		}
+	}
+
+	if (rtp_pusher_)
+	{
+		if (!rtp_pusher_->PushPacket(sps_packet))
+		{
+			LogError("rtp sps packet failed");
+			ret = false;
+		}
+		if (!rtp_pusher_->PushPacket(pps_packet))
+		{
+			LogError("rtp pps packet failed, q:%d", rtp_pusher_->vid_send_pkt_q_->Size());
+			ret = false;
+		}
+// 		if (!rtp_pusher_->PushPacket(sei_packet))
+// 		{
+// 			LogError("rtp sei packet failed, q:%d", rtp_pusher_->vid_send_pkt_q_->Size());
+// 			ret = false;
+// 		}
 	}
 	return ret;
 }

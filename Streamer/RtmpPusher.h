@@ -11,7 +11,7 @@
 // µÚÈý·½¿â
 #include "librtmp/rtmp.h"
 using namespace LQF;
-#pragma comment(lib,"ws2_32.lib")
+//#pragma comment(lib,"ws2_32.lib")
 
 
 

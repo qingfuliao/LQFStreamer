@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\jrtp">
+      <UniqueIdentifier>{46ae21c1-d07e-4fec-9193-aefc2bd8e78f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="jrtplib-3.11.1\examples\example1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpapppacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpbyepacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpcompoundpacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpcompoundpacketbuilder.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcppacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcppacketbuilder.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcprrpacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpscheduler.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpsdesinfo.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpsdespacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtcpsrpacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpabortdescriptors.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpbyteaddress.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpcollisionlist.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpdebug.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtperrors.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpexternaltransmitter.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpinternalsourcedata.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpipv4address.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpipv4destination.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpipv6address.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpipv6destination.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtplibraryversion.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtppacket.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtppacketbuilder.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtppollthread.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtprandom.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtprandomrand48.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtprandomrands.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtprandomurandom.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpsecuresession.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpsession.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpsessionparams.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpsessionsources.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpsourcedata.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpsources.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtptcpaddress.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtptcptransmitter.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtptimeutilities.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpudpv4transmitter.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+    <ClCompile Include="jrtplib-3.11.1\src\rtpudpv6transmitter.cpp">
+      <Filter>源文件\jrtp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpapppacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpbyepacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpcompoundpacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpcompoundpacketbuilder.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcppacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcppacketbuilder.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcprrpacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpscheduler.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpsdesinfo.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpsdespacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpsrpacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtcpunknownpacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpabortdescriptors.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpaddress.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpbyteaddress.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpcollisionlist.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpdebug.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpdefines.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtperrors.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpexternaltransmitter.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtphashtable.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpinternalsourcedata.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpinternalutils.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpipv4address.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpipv4destination.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpipv6address.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpipv6destination.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpkeyhashtable.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtplibraryversion.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpmemorymanager.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpmemoryobject.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtppacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtppacketbuilder.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtppollthread.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtprandom.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtprandomrand48.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtprandomrands.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtprandomurandom.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtprawpacket.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsecuresession.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpselect.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsession.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsessionparams.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsessionsources.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsocketutil.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsocketutilinternal.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsourcedata.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpsources.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpstructs.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtptcpaddress.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtptcptransmitter.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtptimeutilities.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtptransmitter.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtptypes_win.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpudpv4transmitter.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+    <ClInclude Include="jrtplib-3.11.1\src\rtpudpv6transmitter.h">
+      <Filter>源文件\jrtp</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

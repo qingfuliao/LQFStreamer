@@ -13,10 +13,93 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{48071927-0965-4257-b86f-b5c55bbd265d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtp">
+      <UniqueIdentifier>{2bca7cb5-f3c3-407c-a215-f45be50951be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="simple_player.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RTP_Player.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketQueue.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="LogUtil.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameQueue.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="SDL2Display.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Decoder.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Media.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="RTPReceiver.cpp">
+      <Filter>rtp</Filter>
+    </ClCompile>
+    <ClCompile Include="RTPAACPack.cpp">
+      <Filter>rtp</Filter>
+    </ClCompile>
+    <ClCompile Include="RTPH264Pack.cpp">
+      <Filter>rtp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PacketQueue.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="LogUtil.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameQueue.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL2Display.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Decoder.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Media.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="ringbuffer.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="RTPReceiver.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTPAACPack.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTPH264Pack.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTPPack.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTP.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

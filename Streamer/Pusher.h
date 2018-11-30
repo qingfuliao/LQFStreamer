@@ -4,6 +4,16 @@
 #include "RingBuffer.h"
 #include "Thread.h"
 
+typedef enum __PUSH_STATE_T
+{
+	PUSH_STATE_CONNECTING = 1,			/* 连接中 */
+	PUSH_STATE_CONNECTED,				/* 连接成功 */
+	PUSH_STATE_CONNECT_FAILED,			/* 连接失败 */
+	PUSH_STATE_CONNECT_ABORT,			/* 连接异常中断 */
+	PUSH_STATE_PUSHING,					/* 推流中 */
+	PUSH_STATE_DISCONNECTED,			/* 断开连接 */
+	PUSH_STATE_ERROR
+}PUSH_STATE_T;
 
 class Pusher : public Thread
 {

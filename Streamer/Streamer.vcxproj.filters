@@ -34,6 +34,12 @@
     <Filter Include="container">
       <UniqueIdentifier>{aceb3370-a012-4288-9c42-876b7a112310}</UniqueIdentifier>
     </Filter>
+    <Filter Include="rtsp">
+      <UniqueIdentifier>{5bc00b48-b499-4d8e-ab5c-177facea9935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtp">
+      <UniqueIdentifier>{fff204d4-5354-4593-954a-1619efc07bd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,6 +93,15 @@
     <ClCompile Include="MP4Muxer.cpp">
       <Filter>container</Filter>
     </ClCompile>
+    <ClCompile Include="RtspPusher.cpp">
+      <Filter>rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="RtpH264Pack.cpp">
+      <Filter>rtp</Filter>
+    </ClCompile>
+    <ClCompile Include="RTPStream.cpp">
+      <Filter>rtp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioCapture.h">
@@ -139,6 +154,18 @@
     </ClInclude>
     <ClInclude Include="MP4Muxer.h">
       <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="RtspPusher.h">
+      <Filter>rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="RtpH264Pack.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTPStream.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="RTP.h">
+      <Filter>rtp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,0 +1,89 @@
+﻿  rtpudpv6transmitter.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpudpv6transmitter.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpudpv4transmitter.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpudpv4transmitter.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtptimeutilities.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtptimeutilities.cpp(33): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtptcptransmitter.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtptcptransmitter.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtptcpaddress.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtptcpaddress.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpsources.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsources.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpsourcedata.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsourcedata.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpsessionsources.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsessionsources.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpsessionparams.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsessionparams.cpp(33): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpsession.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsession.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpsecuresession.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsecuresession.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtprandomurandom.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtprandomurandom.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtprandomrands.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtprandomrands.cpp(33): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtprandomrand48.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtprandomrand48.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtprandom.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtprandom.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtppollthread.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtppollthread.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtppacketbuilder.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtppacketbuilder.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtppacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtppacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtplibraryversion.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtplibraryversion.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpipv6destination.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpipv6destination.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  正在生成代码...
+  正在编译...
+  rtpipv6address.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpipv6address.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpipv4destination.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpipv4destination.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpipv4address.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpipv4address.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpinternalsourcedata.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpinternalsourcedata.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpexternaltransmitter.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpexternaltransmitter.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtperrors.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtperrors.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpdebug.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpdebug.cpp(33): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpcollisionlist.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpcollisionlist.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpbyteaddress.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpbyteaddress.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtpabortdescriptors.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpabortdescriptors.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpsrpacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpsrpacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpsdespacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpsdespacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpsdesinfo.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpsdesinfo.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpscheduler.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpscheduler.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcprrpacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcprrpacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcppacketbuilder.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcppacketbuilder.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcppacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcppacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpcompoundpacketbuilder.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpcompoundpacketbuilder.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpcompoundpacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpcompoundpacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  rtcpbyepacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpbyepacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  正在生成代码...
+  正在编译...
+  rtcpapppacket.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtcpapppacket.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  example1.cpp
+e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\jrtp-test\jrtplib-3.11.1\src\rtpsession.h(41): fatal error C1083: 无法打开包括文件: “rtpconfig.h”: No such file or directory
+  正在生成代码...

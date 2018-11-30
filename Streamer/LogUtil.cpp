@@ -109,6 +109,6 @@ void suck(const char* fmt, ...)
 	vsnprintf(buf, sizeof(buf), fmt_str.c_str(), arglist);
 	fprintf(stderr, buf);
 	//printf("%s", buf);
-	LogWrite(buf, strlen(buf));
+	//LogWrite(buf, strlen(buf));
 	va_end(arglist);
 }
