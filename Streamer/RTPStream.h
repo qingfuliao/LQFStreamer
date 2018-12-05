@@ -1,4 +1,4 @@
-//#define __RTP_STREAM_H__
+ï»¿//#define __RTP_STREAM_H__
 #ifndef __RTP_STREAM_H__
 #define __RTP_STREAM_H__
 
@@ -13,23 +13,200 @@
 #include <rtpsessionparams.h>
 #include <rtperrors.h>
 #include <rtplibraryversion.h>
+#include <rtcpsrpacket.h>
+#include <rtpsources.h>
+#include <rtpsourcedata.h>
+#include <rtcprrpacket.h>
+#include <rtcpbyepacket.h>
+#include "LogUtil.h"
 using namespace jrtplib;
+class CRTPRTPSession : public RTPSession
+{
+protected:
+	void OnRTCPCompoundPacket(RTCPCompoundPacket *pack, const RTPTime &receivetime, \
+		const RTPAddress *senderaddress)
+	{
+		std::cout << "OnRTCPCompoundPacket: data:" << pack->GetCompoundPacketData() << std::endl;
+		RTCPPacket *rtcppack;
+		pack->GotoFirstPacket();
+		while ((rtcppack = pack->GetNextPacket()) != 0)
+		{
+			if (rtcppack->IsKnownFormat())
+			{
+				switch (rtcppack->GetPacketType())
+				{
+				case RTCPPacket::SR:
+				{
+					RTCPSRPacket *p = (RTCPSRPacket *)rtcppack;
+					// NTP timestamp
+					RTPNTPTime ntp = p->GetNTPTimestamp();
+					int64_t ttime = ntp.GetMSW();
+					ttime -= 0x83aa7e80;
+					struct tm *tt = localtime(&ttime);
+					int64_t ms = (int64_t)ntp.GetLSW() * 1000000 / 0x100000000;
+					char sz_time[64];
+					sprintf(sz_time, "%04d/%02d/%02dâ€‚%02d:%02d:%02d %lldms", tt->tm_year + 1900,
+						tt->tm_mon + 1, tt->tm_mday, tt->tm_hour, tt->tm_min, tt->tm_sec, ms / 1000);
+					LogDebug("SR:NTPTimestamp = %s", sz_time);
 
-typedef struct video_rtp_connect_param {
-	const char		*p_local_ip;
-	int				local_port;
-	const char		*p_remote_ip;
-	int				remote_port;
-	int				payload_index;
-	const char		*p_mime_type;
-	int				sample_rate;
-	bool			enable_rtp_send;
-	bool			enable_rtp_recv;
-	const char		*p_user_name;				 
-	const char		*p_callee_name;			 
-} VIDEO_RTP_CONNECT_PARAM_T;
+					// RTPTimestamp
+					LogDebug("SR:RTPTimestamp = %u", p->GetRTPTimestamp());
+					// Sender's packet count 
+					LogDebug("SR:SenderPacketCount = %u", p->GetSenderPacketCount());
+					// Sender's octet count
+					LogDebug("SR:SenderOctetCount = %u", p->GetSenderOctetCount());
+				}
+				break;
+				case RTCPPacket::RR:
+				{
+					RTCPRRPacket *p = (RTCPRRPacket *)rtcppack;
+					int report_count = p->GetReceptionReportCount();
+					for (int i = 0; i < report_count; i++)
+					{
+						LogDebug("RR[%d]:SSRC = %u", i, p->GetSSRC(i));
+						LogDebug("RR[%d]:FractionLost = %d", i, p->GetFractionLost(i));
+						LogDebug("RR[%d]:LostPacketCount = %u", i, p->GetLostPacketCount(i));
+						LogDebug("RR[%d]:Jitter = %u", i, p->GetJitter(i));
+						LogDebug("RR[%d]:ExtendedHighestSequenceNumber = %u", i,
+							p->GetExtendedHighestSequenceNumber(i));
+						LogDebug("RR[%d]:LSR = %u", i, p->GetLSR(i));
+						LogDebug("RR[%d]:DLSR = %u", i, p->GetDLSR(i));
+					}
+				}
+				break;
+				case RTCPPacket::SDES:
+				{
+					RTCPSDESPacket *p = (RTCPSDESPacket *)rtcppack;
+					char str[1024];
+
+					if (!p->GotoFirstChunk())
+						return;
+
+					do
+					{
+						LogDebug("Chunk:");
+						LogDebug("SSRC: %u", p->GetChunkSSRC());
+						if (p->GotoFirstItem())
+						{
+							do
+							{
+								switch (p->GetItemType())
+								{
+								case RTCPSDESPacket::None:
+									strcpy(str, "None    ");
+									break;
+								case RTCPSDESPacket::CNAME:
+									strcpy(str, "CNAME:  ");
+									break;
+								case RTCPSDESPacket::NAME:
+									strcpy(str, "NAME:   ");
+									break;
+								case RTCPSDESPacket::EMAIL:
+									strcpy(str, "EMAIL:  ");
+									break;
+								case RTCPSDESPacket::PHONE:
+									strcpy(str, "PHONE:  ");
+									break;
+								case RTCPSDESPacket::LOC:
+									strcpy(str, "LOC:    ");
+									break;
+								case RTCPSDESPacket::TOOL:
+									strcpy(str, "TOOL:   ");
+									break;
+								case RTCPSDESPacket::NOTE:
+									strcpy(str, "NOTE:   ");
+									break;
+								case RTCPSDESPacket::PRIV:
+									strcpy(str, "PRIV:   ");
+									break;
+								case RTCPSDESPacket::Unknown:
+								default:
+									strcpy(str, "Unknown ");
+								}
+								LogDebug("%s", str);
+
+								if (p->GetItemType() != RTCPSDESPacket::PRIV)
+								{
+									char str[1024];
+									memcpy(str, p->GetItemData(), p->GetItemLength());
+									str[p->GetItemLength()] = 0;
+									LogDebug("%s", str);
+								}
+							} while (p->GotoNextItem());
+						}
+					} while (p->GotoNextChunk());
+				}
+				break;
+				case RTCPPacket::BYE:
+				{
+					RTCPBYEPacket *p = (RTCPBYEPacket *)rtcppack;
+					int ssrc_count = p->GetSSRCCount();
+					LogDebug("BYE: SSRCCount:%d", ssrc_count);
+					for (int i = 0; i < ssrc_count; i++)
+					{
+
+					}
+					
+				}
+				break;
+				case RTCPPacket::APP:
+				{
+					RTCPAPPPacket *p = (RTCPAPPPacket *)rtcppack;
+					LogDebug("APP ");
+				}
+				break;
+				default:
+					LogDebug("RTCPPacket::default ");
+					break;
+				}
+			}
+		}
+	}
+	void OnRTCPSDESItem(RTPSourceData *srcdat, RTCPSDESPacket::ItemType t, const void *itemdata, size_t itemlength)
+	{
+		char msg[1024];
+
+		memset(msg, 0, sizeof(msg));
+		if (itemlength >= sizeof(msg))
+			itemlength = sizeof(msg) - 1;
+
+		memcpy(msg, itemdata, itemlength);
+		LogDebug("Received SDES item (%d): %s", (int)t, msg);
+	}
+
+	void OnBYEPacket(RTPSourceData *dat)
+	{
+		if (dat->IsOwnSSRC())
+			return;
+
+		uint32_t ip;
+		uint16_t port;
+
+		if (dat->GetRTPDataAddress() != 0)
+		{
+			const RTPIPv4Address *addr = (const RTPIPv4Address *)(dat->GetRTPDataAddress());
+			ip = addr->GetIP();
+			port = addr->GetPort();
+		}
+		else if (dat->GetRTCPDataAddress() != 0)
+		{
+			const RTPIPv4Address *addr = (const RTPIPv4Address *)(dat->GetRTCPDataAddress());
+			ip = addr->GetIP();
+			port = addr->GetPort() - 1;
+		}
+		else
+			return;
+
+		RTPIPv4Address dest(ip, port);
+		DeleteDestination(dest);
+
+		struct in_addr inaddr;
+		inaddr.s_addr = htonl(ip);
+		std::cout << "Deleting destination " << std::string(inet_ntoa(inaddr)) << ":" << port << std::endl;
+	}
+};
 /**
- * Ìá¹©RTPÂëÁ÷µÄ½ÓÊÕºÍ·¢ËÍ
+ * æä¾›RTPç æµçš„æ¥æ”¶å’Œå‘é€
  */
 class RTPStream : public Thread
 {
@@ -40,32 +217,32 @@ public:
 public:
 	RTPStream();
 	~RTPStream();
-	// ³õÊ¼»¯ÒôÊÓÆµÍÆËÍ²ÎÊı
+	// åˆå§‹åŒ–éŸ³è§†é¢‘æ¨é€å‚æ•°
 	bool Init(RTP_CONNECT_PARAM_T &video_param, RTP_CONNECT_PARAM_T &audio_param);
-	bool Connect();		// ¿ªÊ¼Æô¶¯ÍÆËÍRTPÂëÁ÷
-	bool Disconnect();	// Í£Ö¹ÍÆËÍRTPÂëÁ÷
+	bool Connect();		// å¼€å§‹å¯åŠ¨æ¨é€RTPç æµ
+	bool Disconnect();	// åœæ­¢æ¨é€RTPç æµ
 // 	bool RTPSendConnect(VIDEO_RTP_CONNECT_PARAM_T * p_param);	
 // 	bool RTPRecvConnect(VIDEO_RTP_CONNECT_PARAM_T *p_param);
 // 	bool RTPUnconnect(void);
-	// °ÑÒôÊÓÆµÊı¾İĞ´ÈëµÄ·¢ËÍ¶ÓÁĞ£¬´ËÊ±»¹Ã»ÓĞÖ±½Ó·¢ËÍ£¬ĞèÒªÏß³Ì½øĞĞµ÷¶È
-	bool PushPacket(LQF::AVPacket &pkt);	// RTP»¹ÊÇ·Ö¿ªÀ´²Ù×÷ºÃĞ©
-	// ¶ÁÈ¡ÒôÊÓÆµÊı¾İ
+	// æŠŠéŸ³è§†é¢‘æ•°æ®å†™å…¥çš„å‘é€é˜Ÿåˆ—ï¼Œæ­¤æ—¶è¿˜æ²¡æœ‰ç›´æ¥å‘é€ï¼Œéœ€è¦çº¿ç¨‹è¿›è¡Œè°ƒåº¦
+	bool PushPacket(LQF::AVPacket &pkt);	// RTPè¿˜æ˜¯åˆ†å¼€æ¥æ“ä½œå¥½äº›
+	// è¯»å–éŸ³è§†é¢‘æ•°æ®
 	bool PopPacket(LQF::AVPacket &pkt) ;
 	void Run(void) override;
 public:
-	// ÒôÊÓÆµ¶ÓÁĞ·Ö¿ª´æ·Å
-	std::shared_ptr<RingBuffer<LQF::AVPacket>> aud_send_pkt_q_;	// ÒôÆµ·¢ËÍ¶ÓÁĞ
-	std::shared_ptr<RingBuffer<LQF::AVPacket>> vid_send_pkt_q_;	// ÊÓÆµ·¢ËÍ¶ÓÁĞ
+	// éŸ³è§†é¢‘é˜Ÿåˆ—åˆ†å¼€å­˜æ”¾
+	std::shared_ptr<RingBuffer<LQF::AVPacket>> aud_send_pkt_q_;	// éŸ³é¢‘å‘é€é˜Ÿåˆ—
+	std::shared_ptr<RingBuffer<LQF::AVPacket>> vid_send_pkt_q_;	// è§†é¢‘å‘é€é˜Ÿåˆ—
 
-	std::shared_ptr<RingBuffer<LQF::AVPacket>> aud_recv_pkt_q_;	// ÒôÆµ½ÓÊÕ¶ÓÁĞ
-	std::shared_ptr<RingBuffer<LQF::AVPacket>> vid_recv_pkt_q_;	// ÊÓÆµ½ÓÊÕ¶ÓÁĞ
+	std::shared_ptr<RingBuffer<LQF::AVPacket>> aud_recv_pkt_q_;	// éŸ³é¢‘æ¥æ”¶é˜Ÿåˆ—
+	std::shared_ptr<RingBuffer<LQF::AVPacket>> vid_recv_pkt_q_;	// è§†é¢‘æ¥æ”¶é˜Ÿåˆ—
 
 	bool rtp_vid_is_connect_ = false;
 	bool rtp_aud_is_connect_ = false;
 	int	video_format_;
 
 	// video
-	RTPSession jrtp_sess_video_;
+	CRTPRTPSession jrtp_sess_video_;
 	//uint16_t portbase = 8666;
 	//uint16_t destport = 8664;
 	RTPUDPv4TransmissionParams jrtp_transparams_video_;

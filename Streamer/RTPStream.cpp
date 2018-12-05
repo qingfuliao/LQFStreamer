@@ -44,19 +44,23 @@ bool RTPStream::Init(RTP_CONNECT_PARAM_T & video_param,
 {
 	// 这里目前处理发送
 	int status;
-	/* set h264 param */
+	
 	jrtp_sessparams_video_.SetUsePredefinedSSRC(true);  //设置使用预先定义的SSRC    
 	jrtp_sessparams_video_.SetOwnTimestampUnit(video_param.timestamp_unit); /* 设置采样间隔 */
 	jrtp_sessparams_video_.SetAcceptOwnPackets(true);   //接收自己发送的数据包  
 	jrtp_transparams_video_.SetPortbase(video_param.listen_port);
+
+	// 创建RTP会话
 	status = jrtp_sess_video_.Create(jrtp_sessparams_video_, &jrtp_transparams_video_);
 	checkerror(status);
 	uint8_t destip[] = { video_param.dest_ip[0], video_param.dest_ip[1],
 		video_param.dest_ip[2],  video_param.dest_ip[3] };
 	RTPIPv4Address addr(destip, video_param.dest_port);
+	// 指定RTP数据接收端
 	status = jrtp_sess_video_.AddDestination(addr);
 	checkerror(status);
 
+	// 设置RTP会话默认参数
 	jrtp_sess_video_.SetDefaultTimestampIncrement(1000 / 15.0);/* 设置时间戳增加间隔 */
 	jrtp_sess_video_.SetDefaultPayloadType(video_param.payload_type);
 	jrtp_sess_video_.SetDefaultMark(false);
@@ -119,10 +123,7 @@ void RTPStream::Run(void)
 		{
 			break;
 		}
-		if (enable_rtp_recv_)
-		{
-		//	LogDebug("recv");
-		}
+
 		if (rtp_vid_is_connect_)
 		{
 			// 接收
@@ -183,7 +184,6 @@ void RTPStream::Run(void)
 				checkerror(status);
 #endif // !RTP_SUPPORT_THREAD
 				jrtp_sess_video_.EndDataAccess();
-				//Sleep(10);
 			}
 			// 发送
 			if (enable_rtp_send_)
@@ -193,11 +193,9 @@ void RTPStream::Run(void)
 				bool b_get_packet = false;
 
 				// 发送视频包
-				//p_rtp_pkt_buf = NULL;
 				if (vid_send_pkt_q_->Pop(rtp_pkt))
 				{
 					h264_len = rtp_pkt.size;
-					//rtp_video_ts_ = rtp_pkt.timestamp * 90;	// 将毫秒转为90khz的单位
 					memcpy(p_rtp_pkt_buf, rtp_pkt.buffer.get(), h264_len);
 					//if (m_file_vtx != NULL)
 					//	fwrite(p_rtp_pkt_buf, 1, h264_len, m_file_vtx);
@@ -207,6 +205,7 @@ void RTPStream::Run(void)
 					uint32_t send_count = 0;
 					if (h264_len > 4)
 					{
+						// FU-A
 						if (h264_rtp_pack_->Pack(p_rtp_pkt_buf, h264_len, rtp_pkt.timestamp, true))
 						{
 							int i_send = 0;
@@ -215,22 +214,23 @@ void RTPStream::Run(void)
 								p_frame_buf = h264_rtp_pack_->GetPacket(frame_len);
 								if (p_frame_buf != NULL && frame_len > 12)
 								{
-									status = jrtp_sess_video_.SendPacket((void *)p_frame_buf, frame_len);
+									//status = jrtp_sess_video_.SendPacket((void *)p_frame_buf, frame_len);
+									status = jrtp_sess_video_.SendRawData((void *)p_frame_buf, frame_len, true);
 									if(status < 0)
 										LogError("ERROR: %s", RTPGetErrorString(status).c_str());
 								}
 								//if (nal_type == 0x65)
 								{
-									if(send_count++ % 16 == 0)
-									Sleep(8);
+									if(send_count++ % 12 == 0)
+										Sleep(8);
 								}
 							} while (p_frame_buf != NULL);
 						}
 					}
 					if (nal_type == 0x65) // 计算每次发I帧的耗时，发送I帧时容易拥塞丢帧
 					{
-						LogDebug("send I frame size:%d, need time :%llu", h264_len,
-							LQF::AVTimer::GetInstance()->GetTime() - cur_time);
+						LogDebug("send I frame size:%d, need time :%llu, timestamp:%u", h264_len,
+							LQF::AVTimer::GetInstance()->GetTime() - cur_time, rtp_pkt.timestamp);
 					}
 				}	
 				else

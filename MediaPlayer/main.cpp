@@ -53,3 +53,35 @@ int main(int argc, char *argv[])
 	
 	return 0;
 }
+
+
+union test
+{
+	int a;
+	char b : 1;
+	char c : 7;	// 小端的时候，对于bit操作，高位仍然在高位
+};
+
+int endian_test(void)
+{
+	union test t1;
+	t1.a = 1;
+	return t1.c;
+}
+
+int main2(void)
+{
+	int i = endian_test();
+	if (i == 1)
+	{
+		printf("is little endian.\n");
+	}
+	else
+	{
+		printf("is big endian.\n");
+	}
+
+	printf("i = %d.\n", i);
+	system("pause");
+	return 0;
+}

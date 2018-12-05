@@ -59,14 +59,9 @@ static const char *fdkaac_error(AACENC_ERROR erraac)
 */
 void add_adts_to_packet(int8_t *packet, int packetLen, int profile, int freqIdx, int chanCfg)
 {
-	/*
-	int profile = 2; // AAC LC
-	int freqIdx = 3; // 48000Hz
-	int chanCfg = 2; // 2 Channel
-	*/
 	packet[0] = 0xFF;
 	packet[1] = 0xF9;
-	packet[2] = (((profile - 1) << 6) + (freqIdx << 2) + (chanCfg >> 2));
+	packet[2] = ((profile << 6) + (freqIdx << 2) + (chanCfg >> 2));
 	packet[3] = (((chanCfg & 3) << 6) + (packetLen >> 11));
 	packet[4] = ((packetLen & 0x7FF) >> 3);
 	packet[5] = (((packetLen & 7) << 5) + 0x1F);

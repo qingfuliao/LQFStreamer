@@ -41,5 +41,6 @@
 /.vs/
 /Streamer/Debug/
 /Streamer/x64/
-/MediaPlayer/Debug
+/MediaPlayer/Debug/
+/jrtp-test/
 *.DS_Store

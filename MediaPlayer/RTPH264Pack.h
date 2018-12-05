@@ -1,6 +1,12 @@
 #pragma once
 #include "RTP.h"
-#include "RTPPack.h"
+#include <rtppacket.h>
+#include <vector>
+#include <memory>
+using namespace std;
+
+using namespace jrtplib;
+
 /*
 1、RTP Header解析
 1)	V：RTP协议的版本号，占2位，当前协议版本号为2
@@ -26,116 +32,58 @@
 
 // 具体见rfc6184
 
-typedef enum
+typedef struct _RTP_H264_FRAM_T
 {
-	RTP_H264_IDR = 5,
-	RTP_H264_SPS = 7,
-	RTP_H264_PPS = 8,
-	RTP_H264_FU_A = 28,
-}RTP_H264_NAL_TYPE_T;
-
-class RTPH264Pack
-{
-public:
-
-	typedef struct nal_msg_
+	_RTP_H264_FRAM_T()
 	{
-		bool b_end_of_frame;
-		uint8_t type;		// NAL type
-		uint8_t *start;	// pointer to first location in the send buffer
-		uint8_t *end;	// pointer to last location in send buffer
-		uint32_t size;
-	} NAL_MSG_T;
-	
+		size = 0;
+		flags = 0;
+		timestamp = 0;
+	}
 
-	typedef struct rtp_info_
+	_RTP_H264_FRAM_T(uint32_t size)
+		:data(new uint8_t[size])
 	{
-		NAL_MSG_T	nal;	    // NAL information
-		RTP_HDR_T	rtp_hdr;    // RTP header is assembled here
-		int hdr_len;			// length of RTP header
+		this->size = size;
+		flags = 0;
+		timestamp = 0;
+	}
 
-		uint8_t *p_rtp;		// pointer to where RTP packet has beem assembled
-		uint8_t *start;		// pointer to start of payload
-		uint8_t *end;		// pointer to end of payload
+	std::shared_ptr<uint8_t> data; /* 帧数据 */
+	int		size;
+	int		flags;
+	uint32_t timestamp;
+}RTP_H264_FRAM_T;
 
-		uint32_t s_bit;		// bit in the FU header
-		uint32_t e_bit;		// bit in the FU header
-		bool FU_flag;		// fragmented NAL Unit flag
-	} RTP_INFO_T;
-public:
-	RTPH264Pack(const uint32_t ssrc = 0,
-		const uint8_t payload_type = RTP_PAYLOAD_TYPE_H264,
-		const uint16_t rtp_packet_max_size = RTP_PACKET_MAX_SIZE);
-	~RTPH264Pack();
-
-	bool Pack(uint8_t *nal_buf, uint32_t nal_size,
-		uint32_t timestamp, bool end_of_frame);
-
-	//循环调用Get获取RTP包，直到返回值为NULL
-	uint8_t* GetPacket(int &out_packet_size);
-
-	RTP_INFO_T GetRtpInfo() const;
-	void SetRtpInfo(const RTP_INFO_T &RTP_Info);
-private:
-	unsigned int StartCode(uint8_t *cp);
-
-	RTP_INFO_T rtp_info_;
-	bool b_begin_nal_;
-	uint16_t rtp_packet_max_size_;
-};
 
 /**
  * 解释到一帧完整的数据才会返回
  */
 class RTPH264Unpack
 {
-
-#define RTP_VERSION 2
-#define BUF_SIZE (1024 * 500)
-
-	typedef struct
-	{
-		//LITTLE_ENDIAN
-		uint16_t   cc : 4;		/* CSRC count                 */
-		uint16_t   x : 1;		/* header extension flag      */
-		uint16_t   p : 1;		/* padding flag               */
-		uint16_t   v : 2;		/* packet type                */
-		uint16_t   pt : 7;		/* payload type               */
-		uint16_t   m : 1;		/* marker bit                 */
-
-		uint16_t    seq;		/* sequence number            */
-		uint32_t     ts;		/* timestamp                  */
-		uint32_t     ssrc;		/* synchronization source     */
-	} RTP_HDR_T;
+	
 public:
-	RTPH264Unpack() {}
-	RTPH264Unpack(uint8_t h264_playload_type = 96);
+	RTPH264Unpack(void);
 	~RTPH264Unpack(void);
-
-	//pBuf为H264 RTP视频数据包，nSize为RTP视频数据包字节长度，outSize为输出视频数据帧字节长度。
-	//返回值为指向视频数据帧的指针。输入数据可能被破坏。
-	uint8_t* ParseRtpPacket(uint8_t * p_buf, uint16_t buf_size, int &out_size, uint32_t &timestamp);
-
-	void resetPacket();
-
+	int RTPH264UnpackInput(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames, const void* packet, int bytes);
+	///@return 0-ok, other-error
+	int RTPPacketDeserialize(struct rtp_packet_t *pkt, const void* data, int bytes);
 private:
-	RTP_HDR_T rtp_header_;
+	int rtpH264UnpackSTAP(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames, const uint8_t* ptr,
+		int bytes, uint32_t timestamp, int stap_b);
+	int rtpH264UnpackMTAP(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames,
+		const uint8_t* ptr, int bytes, uint32_t timestamp, int n);
+	int rtpH264UnpackFU(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames,
+		const uint8_t* ptr, int bytes, uint32_t timestamp, int fu_b);
+	void pack(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames, 
+		const uint8_t *packet, int bytes, uint32_t timestamp, int flags);
 
-	uint8_t *receive_buf_data_;
+	uint16_t seq_ = 0; // rtp seq
+	uint8_t* ptr_ = NULL;
+	int size_ = 0;
+	int capacity_ = 0;
 
-	bool b_sps_found_;
-	bool b_found_key_frame_;
-	bool m_bAssemblingFrame;
-	bool b_pre_frame_finish_;
-	uint8_t *receive_buf_start_;
-	uint8_t *receive_buf_end_;
-	uint32_t cur_receive_size_;
-
-	uint16_t seq_num_;
-	bool resync_ = true;
-
-	uint8_t h264_playload_type_ = 96;
-	uint32_t ssrc_;
+	int flags_ = -1;
 };
 
 

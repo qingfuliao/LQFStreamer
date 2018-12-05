@@ -2,10 +2,14 @@
 
 #include <stdint.h>
 
+#include "rtp_header.h"
+#include "rtp_util.h"
+#include "rtp_packet.h"
 
 #define RTP_HEADER_LEN		12		// 
-#define RTP_VERSION			2		// RTP版本
 #define RTP_PACKET_MAX_SIZE	1300	// 每个RTP包最大程度，
+#define RTP_VERSION			2
+#define RTP_H264_FRAME_MAX_SIZE (1024 * 500)
 
 // 定义payload type
 enum RTP_PAYLOAD_TYPE
@@ -28,16 +32,28 @@ enum RTP_PAYLOAD_TYPE
 
 typedef struct _rtp_hdr
 {
+#ifdef RTP_BIG_ENDIAN
+	uint8_t version : 2;
+	uint8_t padding : 1;
+	uint8_t extension : 1;
+	uint8_t csrccount : 4;
+
+	uint8_t marker : 1;
+	uint8_t payloadtype : 7;
+#else // little endian
 	uint8_t   csrccount : 4;	/* CSRC count                 */
 	uint8_t   extension : 1;	/* header extension flag      */
 	uint8_t   padding : 1;		/* padding flag               */
 	uint8_t   version : 2;		/* packet type                */
+
 	uint8_t   payloadtype : 7;	/* payload type               */
 	uint8_t   marker : 1;		/* marker bit                 */
+#endif // RTP_BIG_ENDIAN
 
+	// 小端模式
 	uint16_t    sequencenumber;		/* sequence number            */
 	uint32_t	timestamp;			/* timestamp                  */
-	uint32_t    ssrc;		/* synchronization source     */
+	uint32_t    ssrc;				/* synchronization source     */
 
 	void set_mark(bool m)
 	{
@@ -88,3 +104,10 @@ typedef struct rtp_connect_param
 	bool			enable_rtp_send;
 	bool			enable_rtp_recv;
 }RTP_CONNECT_PARAM_T;
+
+
+
+
+
+
+

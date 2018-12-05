@@ -95,10 +95,16 @@
     <ClInclude Include="RTPH264Pack.h">
       <Filter>rtp</Filter>
     </ClInclude>
-    <ClInclude Include="RTPPack.h">
+    <ClInclude Include="RTP.h">
       <Filter>rtp</Filter>
     </ClInclude>
-    <ClInclude Include="RTP.h">
+    <ClInclude Include="rtp_util.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_packet.h">
+      <Filter>rtp</Filter>
+    </ClInclude>
+    <ClInclude Include="rtp_header.h">
       <Filter>rtp</Filter>
     </ClInclude>
   </ItemGroup>

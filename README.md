@@ -47,6 +47,22 @@ visual studio 2015 + win10 ，目前只编译了win32的lib或dll，所以请使
 
 3. 目前的应用已在main.cpp里
 
+## 测试
+### RTP接收码流
+使用MediaPlayer接收码流，使用ffmpeg进行推送
+1. 使用ffmpeg进行推送
+> ffmpeg -re -i out.h264 -vcodec libx264   -f rtp rtp://192.168.100.67:9000>test.sdp. 
+> 192.168.100.67为自己的ip地址
+
+2. 使用ffplay确认推流没有问题
+>ffplay -protocol_whitelist "file,http,https,rtp,udp,tcp,tls" test.sdp
+
+3. 使用MediaPlayer进行拉流播放
+>需要修改RTP_Player.cpp中的 RTP_PlayerTest函数的listen_port端口为9000
+可以接收ffmpeg推送的码流。
+
+4. 使用Stream去推送桌面捕获的码流，配置main.cpp中的main_rtp_send_video()的dest_ip设置IP地址，以及dest_port端口。
+
 ## 版权问题
 
 本项目自有代码可以自由应用于各自商用、非商业的项目。

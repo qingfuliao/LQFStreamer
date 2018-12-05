@@ -134,7 +134,7 @@
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="FrameQueue.h" />
     <ClInclude Include="RTP.h" />
-    <ClInclude Include="RTPPack.h" />
+    <ClInclude Include="rtp_packet.h" />
     <ClInclude Include="LogUtil.h" />
     <ClInclude Include="Media.h" />
     <ClInclude Include="PacketQueue.h" />
@@ -142,8 +142,10 @@
     <ClInclude Include="RTPAACPack.h" />
     <ClInclude Include="RTPH264Pack.h" />
     <ClInclude Include="RTPReceiver.h" />
+    <ClInclude Include="rtp_util.h" />
     <ClInclude Include="SDL2Display.h" />
     <ClInclude Include="Thread.h" />
+    <ClInclude Include="rtp_header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

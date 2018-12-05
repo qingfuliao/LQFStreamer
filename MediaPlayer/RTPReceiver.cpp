@@ -16,7 +16,7 @@ RTPReceiver::RTPReceiver()
 {
 	rtp_video_ts_ = 0;
 
-	h264_rtp_unpack_.reset(new RTPH264Unpack(96));
+	h264_rtp_unpack_.reset(new RTPH264Unpack());
 
 	vid_recv_pkt_q_.reset(new RingBuffer<LQF::AVPacket>(10));
 
@@ -25,31 +25,7 @@ RTPReceiver::RTPReceiver()
 
 RTPReceiver::~RTPReceiver()
 {
-}
-
-bool RTPReceiver::Init(const uint16_t payload_type, const uint16_t base_port)
-{
-	sessparams.SetOwnTimestampUnit(1.0 / 1000.0);
-	sessparams.SetAcceptOwnPackets(true);
-
-	transparams.SetPortbase(base_port);	// 监听的端口
-	int status = sess.Create(sessparams, &transparams);
-	if (status < 0)
-	{
-		LogError("Create failed, %s", RTPGetErrorString(status).c_str());
-		return false;
-	}
-	uint8_t dest_ip[] = { 127,0,0,1 };	// 对方IP和端口
-	RTPIPv4Address addr(dest_ip, 8000);
-	status = sess.AddDestination(addr);
-	if (status < 0)
-	{
-		LogError("AddDestination failed, %s", RTPGetErrorString(status).c_str());
-		return false;
-	}
-
-	enable_rtp_recv_ = true;
-	return true;
+	jrtp_sess_video_.BYEDestroy(RTPTime(10, 0), 0, 0);
 }
 
 bool RTPReceiver::Init(RTP_CONNECT_PARAM_T & connect_param)
@@ -62,7 +38,7 @@ bool RTPReceiver::Init(RTP_CONNECT_PARAM_T & connect_param)
 		transparams.SetPortbase(connect_param.listen_port);	// 监听的端口
 		enable_rtp_recv_ = true;
 	}
-	int status = sess.Create(sessparams, &transparams);
+	int status = jrtp_sess_video_.Create(sessparams, &transparams);
 	if (status < 0)
 	{
 		LogError("Create failed, %s", RTPGetErrorString(status).c_str());
@@ -74,7 +50,7 @@ bool RTPReceiver::Init(RTP_CONNECT_PARAM_T & connect_param)
 			connect_param.dest_ip[2],connect_param.dest_ip[3] };	// 对方IP和端口
 
 		RTPIPv4Address addr(dest_ip, connect_param.dest_port);
-		status = sess.AddDestination(addr);
+		status = jrtp_sess_video_.AddDestination(addr);
 		if (status < 0)
 		{
 			LogError("AddDestination failed, %s", RTPGetErrorString(status).c_str());
@@ -104,18 +80,8 @@ bool RTPReceiver::PopPacket(LQF::AVPacket & pkt)
 
 void RTPReceiver::Run(void)
 {
-	int			get_data_len;
-	uint8_t		*p_recv_buf = NULL;		// 不需要请求内存
-	uint8_t		*p_frame_buf = NULL;
-	int			h264_len = 0;
-	int			frame_len = 0;
-										/* Create a set */
-	uint32_t recv_ts = 0;
-
-	uint8_t *loaddata;
 	RTPPacket *pack;
 	int status;
-	int len;
 	uint16_t seq = 0;
 	uint16_t pre_seq = 0;
 	LogDebug("Run........");
@@ -125,46 +91,41 @@ void RTPReceiver::Run(void)
 		{
 			break;
 		}
-
-		get_data_len = 0;
-		sess.BeginDataAccess();
-		if (sess.GotoFirstSourceWithData())
+		jrtp_sess_video_.BeginDataAccess();
+		if (jrtp_sess_video_.GotoFirstSourceWithData())
 		{
 			do
 			{
-				while ((pack = sess.GetNextPacket()) != NULL)
+				while ((pack = jrtp_sess_video_.GetNextPacket()) != NULL)
 				{
-					seq = pack->GetSequenceNumber();
-					if ((pre_seq + 1) != seq)
+					if (pack->GetPayloadType() == RTP_PAYLOAD_TYPE_H264) //H264
 					{
-						LogDebug("----------pre_seq:%d,seq:%d\n", pre_seq, seq);
-					}
-					pre_seq = seq;
+						std::vector<RTP_H264_FRAM_T> rtp_h264_frames;
+						if(h264_rtp_unpack_->RTPH264UnpackInput(rtp_h264_frames,
+							pack->GetPacketData(), pack->GetPacketLength()) == 1)
+						{ 
+							for (int i = 0; i < rtp_h264_frames.size(); i++)
+							{
+								uint8_t *nalu_data = rtp_h264_frames.at(i).data.get();
+								int nalu_size = rtp_h264_frames.at(i).size;
+								uint32_t timestamp = rtp_h264_frames.at(i).timestamp;
+								int flags = rtp_h264_frames.at(i).flags;
+								if (RTP_PAYLOAD_FLAG_PACKET_LOST == flags)
+								{
+									LogDebug("Lost packet");
+								}
+								if (m_file_vrx != NULL)
+								{
+									fwrite(nalu_data, 1, nalu_size, m_file_vrx);
+								}
 
-					loaddata =  pack->GetPayloadData();
-					len = pack->GetPayloadLength();
-					static uint32_t s_rtp_recv_count = 0;
-					//if(s_rtp_recv_count++ %90 == 0)
-					//LogDebug("Recv len:%d, seq:%d", len, seq);
-					if (pack->GetPayloadType() == 96) //H264
-					{
-						uint32_t cur_ts = 0;
-								
-						p_recv_buf = h264_rtp_unpack_->ParseRtpPacket(loaddata,
-							len, get_data_len, cur_ts);
-						if (m_file_vrx != NULL && p_recv_buf)
-							fwrite(p_recv_buf, 1, get_data_len, m_file_vrx);
-						if (p_recv_buf != NULL)
-						{
-							LQF::AVPacket rtp_packet(get_data_len);
-							rtp_packet.size = get_data_len;
-							rtp_packet.type = VIDEO_PACKET;
-							rtp_packet.timestamp = (uint32_t)cur_ts;
-							memcpy(rtp_packet.buffer.get(), p_recv_buf, get_data_len);
-							vid_recv_pkt_q_->Push(std::move(rtp_packet));
-							fwrite(p_recv_buf, 1, get_data_len, m_file_vrx);
-							if (s_rtp_recv_count++ % 90 == 0)
-							LogDebug("Recv get_data_len = %d, timestamp = %u, rtp", get_data_len, rtp_packet.timestamp);
+								LQF::AVPacket rtp_packet(nalu_size);
+								rtp_packet.size = nalu_size;
+								rtp_packet.type = VIDEO_PACKET;
+								rtp_packet.timestamp = (uint32_t)timestamp;
+								memcpy(rtp_packet.buffer.get(), nalu_data, nalu_size);
+								vid_recv_pkt_q_->Push(std::move(rtp_packet));
+							}
 						}
 					}
 					else
@@ -172,16 +133,16 @@ void RTPReceiver::Run(void)
 						LogDebug("!!!  GetPayloadType = %d !!!! \n ", pack->GetPayloadType());
 					}
 
-					sess.DeletePacket(pack);
+					jrtp_sess_video_.DeletePacket(pack);
 				}
-			} while (sess.GotoNextSourceWithData());
+			} while (jrtp_sess_video_.GotoNextSourceWithData());
 		}
 				
 #ifndef RTP_SUPPORT_THREAD
-			status = sess.Poll();
+			status = jrtp_sess_video_.Poll();
 			checkerror(status);
 #endif // !RTP_SUPPORT_THREAD
-		sess.EndDataAccess();
+		jrtp_sess_video_.EndDataAccess();
 		Sleep(5);
 	} // end of while(true)
 

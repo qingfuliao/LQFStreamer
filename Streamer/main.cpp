@@ -153,7 +153,10 @@ int main_rtp_send_video()
 
 	RTP_CONNECT_PARAM_T video_param;
 	video_param.enable_rtp_send = true;
-	video_param.dest_port = 9000;
+// 	video_param.dest_ip[0] = 127;			// 回环测试
+// 	video_param.dest_ip[1] = 0;
+// 	video_param.dest_ip[2] = 0;
+// 	video_param.dest_ip[3] = 1;
 	video_param.dest_ip[0] = 127;			// 回环测试
 	video_param.dest_ip[1] = 0;
 	video_param.dest_ip[2] = 0;

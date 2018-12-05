@@ -424,7 +424,7 @@ void MediaCenter::PushVideo()
 				{
 					if (!rtp_pusher_->PushPacket(video_packet))
 					{
-						//LogError("rtp push video packet failed");
+						LogError("rtp push video packet failed");
 					}
 				}
 				#if 1
