@@ -1,6 +1,6 @@
 #ifndef __RTP_UTIL_H__
 #define __RTP_UTIL_H__
-#include "rtp_header.h"
+#include "RTPHeader.h"
 
 // The Internet Protocol defines big-endian as the standard network byte order
 #define nbo_r16 rtp_read_uint16

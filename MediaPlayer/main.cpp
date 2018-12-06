@@ -30,7 +30,8 @@ void CleanupSockets()
 
 
 extern int simple_player_test(int argc, char *argv[]);
-int RTP_PlayerTest(int argc, char *argv[]);
+extern int RTP_PlayerTest(int argc, char *argv[]);
+extern int RTP_AAC_Receiver_Test(int argc, char *argv[]);
 #undef main
 int main(int argc, char *argv[])
 {
@@ -42,9 +43,13 @@ int main(int argc, char *argv[])
 // 	{
 // 		printf("simple_player_test failed\n");
 // 	}
-	if (RTP_PlayerTest(argc, argv) < 0)
+// 	if (RTP_PlayerTest(argc, argv) < 0)
+// 	{
+// 		printf("RTP_PlayerTest failed\n");
+// 	}
+	if (RTP_AAC_Receiver_Test(argc, argv)< 0)
 	{
-		printf("RTP_PlayerTest failed\n");
+			printf("RTP_AAC_Receiver_Test failed\n");
 	}
 	LogDeinit();
 	CleanupSockets();

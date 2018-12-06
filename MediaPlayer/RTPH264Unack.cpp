@@ -1,8 +1,7 @@
-#include "RtpH264Pack.h"
+#include "RtpH264Unpack.h"
 #include <string.h>
 #include <stdio.h>
 #include <vector>
-#include <utility>	//std::pair
 #include "LogUtil.h"
 
 #define H264_NAL(v)	(v & 0x1F)
@@ -12,9 +11,6 @@
 
 #define  assert(x) {if(0==x){ LogError("assert failed"); return -1; }}
 using namespace std;
-
-
-
 
 RTPH264Unpack::RTPH264Unpack(void):
 	seq_( 0 ),
@@ -233,12 +229,12 @@ int RTPH264Unpack::rtpH264UnpackFU(std::vector<RTP_H264_FRAM_T>& rtp_h264_frames
 int RTPH264Unpack::RTPH264UnpackInput(std::vector<RTP_H264_FRAM_T>& rtp_h264_frames, const void * packet, int bytes)
 {
 	unsigned char nal;
-	struct rtp_packet_t pkt;
+	RTP_PACKET_T pkt;
 	rtp_h264_frames.clear();
 
 	if (0 != RTPPacketDeserialize(&pkt, packet, bytes) || pkt.payloadlen < 1)
 	{
-		LogError("no memmory");
+		LogError("no memory");
 		return -EINVAL;
 	}
 	if (-1 == flags_)
@@ -285,7 +281,7 @@ int RTPH264Unpack::RTPH264UnpackInput(std::vector<RTP_H264_FRAM_T>& rtp_h264_fra
 	}
 }
 
-int RTPH264Unpack::RTPPacketDeserialize(rtp_packet_t * pkt, const void * data, int bytes)
+int RTPH264Unpack::RTPPacketDeserialize(RTP_PACKET_T * pkt, const void * data, int bytes)
 {
 	uint32_t i, v;
 	int hdrlen;
@@ -294,7 +290,7 @@ int RTPH264Unpack::RTPPacketDeserialize(rtp_packet_t * pkt, const void * data, i
 	if (bytes < RTP_FIXED_HEADER) // RFC3550 5.1 RTP Fixed Header Fields(p12)
 		return -1;
 	ptr = (const unsigned char *)data;
-	memset(pkt, 0, sizeof(struct rtp_packet_t));
+	memset(pkt, 0, sizeof(RTP_PACKET_T));
 
 	// pkt header
 	v = nbo_r32(ptr);

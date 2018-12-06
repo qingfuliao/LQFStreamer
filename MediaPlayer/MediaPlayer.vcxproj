@@ -74,12 +74,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>libs\ffmpeg-4.0.2-win32-dev\include;libs\SDL2\include;..\thirdlib\jrtplib\jrtp;..\thirdlib\jrtplib\jthread;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>libs\ffmpeg-4.0.2-win32-dev\include;libs\SDL2\include;..\thirdlib\jrtplib\jrtp;..\thirdlib\jrtplib\jthread;..\thirdlib\portaudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>libs\SDL2\lib\x86;libs\ffmpeg-4.0.2-win32-dev\lib;..\thirdlib\jrtplib\jthread;..\thirdlib\jrtplib\jrtp;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;Ws2_32.lib;delayimp.lib;Winmm.lib;qwave.lib;jrtplib_d.lib;jthread_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>libs\SDL2\lib\x86;libs\ffmpeg-4.0.2-win32-dev\lib;..\thirdlib\jrtplib\jthread;..\thirdlib\jrtplib\jrtp;..\thirdlib\portaudio\lib\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;Ws2_32.lib;delayimp.lib;Winmm.lib;qwave.lib;jrtplib_d.lib;jthread_d.lib;portaudio_static_x86.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,9 +122,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Media.cpp" />
     <ClCompile Include="PacketQueue.cpp" />
-    <ClCompile Include="RTPAACPack.cpp" />
-    <ClCompile Include="RTPH264Pack.cpp" />
+    <ClCompile Include="RTPAACUnpack.cpp" />
+    <ClCompile Include="RTPH264Unack.cpp" />
     <ClCompile Include="RTPReceiver.cpp" />
+    <ClCompile Include="RTP_AAC_Receiver.cpp" />
     <ClCompile Include="RTP_Player.cpp" />
     <ClCompile Include="SDL2Display.cpp" />
     <ClCompile Include="simple_player.cpp" />
@@ -134,18 +135,18 @@
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="FrameQueue.h" />
     <ClInclude Include="RTP.h" />
-    <ClInclude Include="rtp_packet.h" />
+    <ClInclude Include="RTPpacket.h" />
     <ClInclude Include="LogUtil.h" />
     <ClInclude Include="Media.h" />
     <ClInclude Include="PacketQueue.h" />
     <ClInclude Include="ringbuffer.h" />
-    <ClInclude Include="RTPAACPack.h" />
-    <ClInclude Include="RTPH264Pack.h" />
+    <ClInclude Include="RTPAACUnpack.h" />
+    <ClInclude Include="RTPH264Unpack.h" />
     <ClInclude Include="RTPReceiver.h" />
-    <ClInclude Include="rtp_util.h" />
+    <ClInclude Include="RTPUtil.h" />
     <ClInclude Include="SDL2Display.h" />
     <ClInclude Include="Thread.h" />
-    <ClInclude Include="rtp_header.h" />
+    <ClInclude Include="RTPHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

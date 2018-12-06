@@ -1,10 +1,10 @@
 #pragma once
 
-#include "rtp_header.h"
+#include "RTPHeader.h"
 
 #define RTP_FIXED_HEADER 12
 
-struct rtp_packet_t
+typedef struct _rtp_packet
 {
 	rtp_header_t rtp;
 	uint32_t csrc[16];
@@ -13,4 +13,4 @@ struct rtp_packet_t
 	uint16_t reserved; // extension reserved
 	const void* payload; // payload
 	int payloadlen; // payload length in bytes
-};
+}RTP_PACKET_T;

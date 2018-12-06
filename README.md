@@ -23,12 +23,17 @@ visual studio 2015 + win10 ，目前只编译了win32的lib或dll，所以请使
 - 声音录制
 - RTMP推流
 - MP4文件保存
+- Streamer支持RTP推送视频
+- MediaPlayer支持RTP接收视频并播放
+- MediaPlayer支持RTP接收音频并播放
 
 ## 后续任务
 - 完善RTMP推流的异常处理
 - 集成支持RTSP推流
 - 集成RTMP服务器，供局域网客户端之间访问。
-- RTP局域网快速同屏
+- RTSP推流器实现
+- RTSP播放器实现
+- RTMP播放器实现
 
 ## 编译要求
 - vs2015或以上
@@ -48,7 +53,7 @@ visual studio 2015 + win10 ，目前只编译了win32的lib或dll，所以请使
 3. 目前的应用已在main.cpp里
 
 ## 测试
-### RTP接收码流
+### RTP接收视频码流
 使用MediaPlayer接收码流，使用ffmpeg进行推送
 1. 使用ffmpeg进行推送
 > ffmpeg -re -i out.h264 -vcodec libx264   -f rtp rtp://192.168.100.67:9000>test.sdp. 
@@ -62,7 +67,24 @@ visual studio 2015 + win10 ，目前只编译了win32的lib或dll，所以请使
 可以接收ffmpeg推送的码流。
 
 4. 使用Stream去推送桌面捕获的码流，配置main.cpp中的main_rtp_send_video()的dest_ip设置IP地址，以及dest_port端口。
+### RTP接收音频码流
+1. MediaPlayer中RTP_AAC_Receiver.cpp的RTP_AAC_Receiver_Test函数，用来测试接收音频码流，目前只支持AAC码流，默认支持的是LC AAC，44.1KHz，2通道。
+2. 使用ffmpeg进行推送码流，统一设置输出为44.1kHz，2通道
+```
+// 
+// 推送AAC文件
+ffmpeg -re -i out.aac -c:a  aac -flags +global_header -ar 44100 -ac 2  -f rtp rtp://192.168.100.61:9004>audio.sdp
 
+// 将MP3转成AAC格式
+ffmpeg -re -i buweishui.mp3 -c:a  aac -flags +global_header -ar 44100 -ac 2  -f rtp rtp://192.168.100.61:9004>audio.sdp
+
+// 推送音视频文件中的audio
+ffmpeg -re -i dp19.mp4 -vn -c:a  aac -flags +global_header -ar 44100 -ac 2  -f rtp rtp://192.168.100.61:9004>audio.sdp
+```
+3. 测试的时候可以先用ffplay进行播放测试
+```
+ffplay -protocol_whitelist "file,http,https,rtp,udp,tcp,tls" audio.sdp
+```
 ## 版权问题
 
 本项目自有代码可以自由应用于各自商用、非商业的项目。

@@ -4,8 +4,9 @@
 #include <time.h>
 #include "Media.h"
 #include "RingBuffer.h"
-#include "RtpH264Pack.h"
+#include "RtpH264Unpack.h"
 #include "Thread.h"
+#include "RTPAACUnpack.h"
 #include <rtpsession.h>
 #include <rtpudpv4transmitter.h>
 #include <rtpipv4address.h>
@@ -24,7 +25,6 @@ protected:
 	void OnRTCPCompoundPacket(RTCPCompoundPacket *pack, const RTPTime &receivetime, \
 		const RTPAddress *senderaddress)
 	{
-		std::cout << "OnRTCPCompoundPacket: data:" << pack->GetCompoundPacketData() << std::endl;
 		RTCPPacket *rtcppack;
 		pack->GotoFirstPacket();
 		while ((rtcppack = pack->GetNextPacket()) != 0)
@@ -147,9 +147,7 @@ protected:
 class RTPReceiver : public Thread
 {
 public:
-	const  char *video_type_h264 = "H264";
-public:
-	RTPReceiver();
+	RTPReceiver(const int queue_size);
 	~RTPReceiver();
 	bool Init(RTP_CONNECT_PARAM_T &connect_param);
 	bool Start();
@@ -158,19 +156,20 @@ public:
 	void Run(void) override;
 private:
 
-	std::shared_ptr<RingBuffer<LQF::AVPacket>> vid_recv_pkt_q_;	// 视频接收队列
+	std::shared_ptr<RingBuffer<LQF::AVPacket>> rtp_recv_pkt_q_;	// 
 
+	int payload_type_;
 	// video
-	CRTPRTPSession jrtp_sess_video_;
+	CRTPRTPSession jrtp_sess_;
 	RTPUDPv4TransmissionParams transparams;
 	RTPSessionParams sessparams;
 
-	uint32_t				rtp_video_ts_ = 0;
 	bool					enable_rtp_send_ = false;
 	bool					enable_rtp_recv_ = false;
 
 	std::shared_ptr<RTPH264Unpack> h264_rtp_unpack_;
-	FILE		*m_file_vrx = NULL;
+	std::shared_ptr<RTPAACUnpack> aac_rtp_unpack_;
+	FILE		*rtp_rx_file = NULL;
 	FILE		*m_file_vtx = NULL;
 };
 

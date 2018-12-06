@@ -46,7 +46,7 @@ static int frameRefreshThread(void *arg)
 
 int RTP_PlayerTest(int argc, char *argv[])
 {
-	RTPReceiver rtp_receiver;
+	RTPReceiver rtp_receiver(10);
 	RTP_CONNECT_PARAM_T connect_param;
 	connect_param.enable_rtp_recv = true;		// 允许接收
 	connect_param.listen_ip[0] = 127;			// 回环测试
@@ -153,7 +153,7 @@ int RTP_PlayerTest(int argc, char *argv[])
 				   // 直接显示出来
 					if (!is_display_open)
 					{
-						if (sdl2_display.display_init(PLAYER_WIDTH, PLAYER_HEIGHT) < 0)
+						if (sdl2_display.display_init((int)PLAYER_WIDTH, (int)PLAYER_HEIGHT) < 0)
 						{
 							LogError("display_init failed");
 							rtp_receiver.Stop();

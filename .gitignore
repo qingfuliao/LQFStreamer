@@ -10,7 +10,8 @@
 *.pch
 *.VC.db
 *.VC.VC.opendb
-
+*.obj
+*.log
 # Compiled Dynamic libraries
 #*.dylib
 #*.dll
@@ -42,5 +43,6 @@
 /Streamer/Debug/
 /Streamer/x64/
 /MediaPlayer/Debug/
+/MediaPlayer/.vs/
 /jrtp-test/
 *.DS_Store

@@ -12,24 +12,39 @@
 	}	\
 }
 
-RTPReceiver::RTPReceiver()
+RTPReceiver::RTPReceiver(const int queue_size)
 {
-	rtp_video_ts_ = 0;
-
-	h264_rtp_unpack_.reset(new RTPH264Unpack());
-
-	vid_recv_pkt_q_.reset(new RingBuffer<LQF::AVPacket>(10));
-
-	m_file_vrx = fopen("vrx.h264", "wb+");
+	
+	rtp_recv_pkt_q_.reset(new RingBuffer<LQF::AVPacket>(queue_size));
 }
 
 RTPReceiver::~RTPReceiver()
 {
-	jrtp_sess_video_.BYEDestroy(RTPTime(10, 0), 0, 0);
+	jrtp_sess_.BYEDestroy(RTPTime(10, 0), 0, 0);
 }
 
 bool RTPReceiver::Init(RTP_CONNECT_PARAM_T & connect_param)
 {
+	payload_type_ = connect_param.payload_type;
+	if (RTP_PAYLOAD_TYPE_H264 == payload_type_)
+	{
+		h264_rtp_unpack_.reset(new RTPH264Unpack());
+		rtp_rx_file = fopen("rtp_rx.h264", "wb+");
+	}
+	else if (RTP_PAYLOAD_TYPE_AAC == payload_type_)
+	{
+		aac_rtp_unpack_.reset(new RTPAACUnpack(connect_param.audio_param.profile,
+			connect_param.audio_param.frequency_index, 
+			connect_param.audio_param.channel_configuration));
+		rtp_rx_file = fopen("rtp_rx.aac", "wb+");
+	}
+	else
+	{
+		LogError("unsport payload type = %d", payload_type_);
+		return false;
+	}
+
+
 	sessparams.SetOwnTimestampUnit(connect_param.timestamp_unit);
 	sessparams.SetAcceptOwnPackets(true);
 
@@ -38,7 +53,7 @@ bool RTPReceiver::Init(RTP_CONNECT_PARAM_T & connect_param)
 		transparams.SetPortbase(connect_param.listen_port);	// 监听的端口
 		enable_rtp_recv_ = true;
 	}
-	int status = jrtp_sess_video_.Create(sessparams, &transparams);
+	int status = jrtp_sess_.Create(sessparams, &transparams);
 	if (status < 0)
 	{
 		LogError("Create failed, %s", RTPGetErrorString(status).c_str());
@@ -50,7 +65,7 @@ bool RTPReceiver::Init(RTP_CONNECT_PARAM_T & connect_param)
 			connect_param.dest_ip[2],connect_param.dest_ip[3] };	// 对方IP和端口
 
 		RTPIPv4Address addr(dest_ip, connect_param.dest_port);
-		status = jrtp_sess_video_.AddDestination(addr);
+		status = jrtp_sess_.AddDestination(addr);
 		if (status < 0)
 		{
 			LogError("AddDestination failed, %s", RTPGetErrorString(status).c_str());
@@ -75,7 +90,7 @@ bool RTPReceiver::Stop()
 
 bool RTPReceiver::PopPacket(LQF::AVPacket & pkt)
 {
-	return vid_recv_pkt_q_->Pop(pkt);
+	return rtp_recv_pkt_q_->Pop(pkt);
 }
 
 void RTPReceiver::Run(void)
@@ -91,12 +106,12 @@ void RTPReceiver::Run(void)
 		{
 			break;
 		}
-		jrtp_sess_video_.BeginDataAccess();
-		if (jrtp_sess_video_.GotoFirstSourceWithData())
+		jrtp_sess_.BeginDataAccess();
+		if (jrtp_sess_.GotoFirstSourceWithData())
 		{
 			do
 			{
-				while ((pack = jrtp_sess_video_.GetNextPacket()) != NULL)
+				while ((pack = jrtp_sess_.GetNextPacket()) != NULL)
 				{
 					if (pack->GetPayloadType() == RTP_PAYLOAD_TYPE_H264) //H264
 					{
@@ -114,9 +129,9 @@ void RTPReceiver::Run(void)
 								{
 									LogDebug("Lost packet");
 								}
-								if (m_file_vrx != NULL)
+								if (rtp_rx_file != NULL)
 								{
-									fwrite(nalu_data, 1, nalu_size, m_file_vrx);
+									fwrite(nalu_data, 1, nalu_size, rtp_rx_file);
 								}
 
 								LQF::AVPacket rtp_packet(nalu_size);
@@ -124,7 +139,43 @@ void RTPReceiver::Run(void)
 								rtp_packet.type = VIDEO_PACKET;
 								rtp_packet.timestamp = (uint32_t)timestamp;
 								memcpy(rtp_packet.buffer.get(), nalu_data, nalu_size);
-								vid_recv_pkt_q_->Push(std::move(rtp_packet));
+								if (!rtp_recv_pkt_q_->Push(std::move(rtp_packet)))
+								{
+									LogError("push h264 failed");
+								}
+							}
+						}
+					}
+					else if(pack->GetPayloadType() == RTP_PAYLOAD_TYPE_AAC) //
+					{
+						std::vector<RTP_AAC_FRAM_T> rtp_aac_frames;
+						if (aac_rtp_unpack_->RTPAACUnpackInput(rtp_aac_frames,
+							pack->GetPacketData(), pack->GetPacketLength()) == 1)
+						{
+							for (int i = 0; i < rtp_aac_frames.size(); i++)
+							{
+								uint8_t *aac_data = rtp_aac_frames.at(i).data.get();
+								int aac_size = rtp_aac_frames.at(i).size;
+								uint32_t timestamp = rtp_aac_frames.at(i).timestamp;
+								int flags = rtp_aac_frames.at(i).flags;
+								if (RTP_PAYLOAD_FLAG_PACKET_LOST == flags)
+								{
+									LogDebug("Lost packet");
+								}
+								if (rtp_rx_file != NULL)
+								{
+									fwrite(aac_data, 1, aac_size, rtp_rx_file);
+								}
+
+								LQF::AVPacket rtp_packet(aac_size);
+								rtp_packet.size = aac_size;
+								rtp_packet.type = AUDIO_PACKET;
+								rtp_packet.timestamp = (uint32_t)timestamp;
+								memcpy(rtp_packet.buffer.get(), aac_data, aac_size);
+								if (!rtp_recv_pkt_q_->Push(std::move(rtp_packet)))
+								{
+									LogError("push aac failed");
+								}
 							}
 						}
 					}
@@ -133,16 +184,16 @@ void RTPReceiver::Run(void)
 						LogDebug("!!!  GetPayloadType = %d !!!! \n ", pack->GetPayloadType());
 					}
 
-					jrtp_sess_video_.DeletePacket(pack);
+					jrtp_sess_.DeletePacket(pack);
 				}
-			} while (jrtp_sess_video_.GotoNextSourceWithData());
+			} while (jrtp_sess_.GotoNextSourceWithData());
 		}
 				
 #ifndef RTP_SUPPORT_THREAD
-			status = jrtp_sess_video_.Poll();
+			status = jrtp_sess_.Poll();
 			checkerror(status);
 #endif // !RTP_SUPPORT_THREAD
-		jrtp_sess_video_.EndDataAccess();
+		jrtp_sess_.EndDataAccess();
 		Sleep(5);
 	} // end of while(true)
 

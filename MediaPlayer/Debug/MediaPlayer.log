@@ -1,6 +1,6 @@
-﻿  RTP_Player.cpp
+﻿cl : 命令行 warning D9028: 最小重新生成失败，正在转换为标准生成
+  RTP_AAC_Receiver.cpp
 e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\mediaplayer\libs\ffmpeg-4.0.2-win32-dev\include\libavutil\rational.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\mediaplayer\rtpreceiver.h(46): warning C4566: 由通用字符名称“\u2002”表示的字符不能在当前代码页(936)中表示出来
-e:\dn_class\multimedia\src\multimediaproject\lqfstreamer\mediaplayer\rtp_player.cpp(156): warning C4244: “参数”: 从“double”转换到“const int”，可能丢失数据
   MediaPlayer.vcxproj -> E:\dn_class\multimedia\src\MultimediaProject\LQFStreamer\MediaPlayer\Debug\MediaPlayer.exe
   MediaPlayer.vcxproj -> E:\dn_class\multimedia\src\MultimediaProject\LQFStreamer\MediaPlayer\Debug\MediaPlayer.pdb (Partial PDB)

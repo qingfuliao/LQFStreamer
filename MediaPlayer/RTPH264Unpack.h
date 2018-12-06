@@ -61,13 +61,12 @@ typedef struct _RTP_H264_FRAM_T
  */
 class RTPH264Unpack
 {
-	
 public:
 	RTPH264Unpack(void);
 	~RTPH264Unpack(void);
 	int RTPH264UnpackInput(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames, const void* packet, int bytes);
 	///@return 0-ok, other-error
-	int RTPPacketDeserialize(struct rtp_packet_t *pkt, const void* data, int bytes);
+	int RTPPacketDeserialize(RTP_PACKET_T *pkt, const void* data, int bytes);
 private:
 	int rtpH264UnpackSTAP(std::vector<RTP_H264_FRAM_T> &rtp_h264_frames, const uint8_t* ptr,
 		int bytes, uint32_t timestamp, int stap_b);
