@@ -19,10 +19,10 @@ typedef struct VideoCaptureConfig_
 	int height;
 }VideoCaptureConfig;
 
-struct RGBAFrame
+typedef struct RGBAFrame
 {
 	RGBAFrame(uint32_t size = 100)
-		: data(new uint8_t[size + 1024])
+		: data(new uint8_t[size])
 	{
 		this->size = size;
 	}
@@ -32,7 +32,20 @@ struct RGBAFrame
 	uint32_t height;
 	uint64_t timestamp;
 	std::shared_ptr<uint8_t> data;
-};
+}RGBA_FRAME_T;
+
+//	win7及以前版本的录制
+typedef struct cap_screen_
+{
+	HDC memdc;
+	HBITMAP hbmp;
+	uint8_t* buffer;
+	int            length;
+
+	int width;
+	int height;
+	int bitcount;
+}WIN7_CAPTURE_SCREEN_T;
 
 class VideoCapture
 {
@@ -54,9 +67,17 @@ public:
 
 	bool IsCapturing()
 	{
-		if (is_initialized_ && capture_ && capture_->isStarted() == 0)
-			return true;
-		return false;
+		if(b_win8_above)
+		{ 
+			if (is_initialized_ && capture_ && capture_->isStarted() == 0)
+				return true;
+			else
+				return false;
+		}
+		else
+		{
+			return is_initialized_;
+		}
 	}
 
 	uint32_t Width() const
@@ -71,19 +92,25 @@ public:
 	friend void TriggerCaptureCallback(void *user)
 	{
 		VideoCapture *capture = (VideoCapture *)user;
-		capture->TriggerCapture();
+		capture->triggerCapture();
 	}
 
 private:
-
-	
-	bool GetDisplaySetting(std::string& name);
-	void WaitTriggerCapture();
-	void TriggerCapture();
-	void Capture();
+	bool getDisplaySetting(std::string& name);
+	void waitTriggerCapture();
+	void triggerCapture();
+	void win7Capture();
+	void win8OrAboveCapture();
+	void run();
 
 	std::thread thread_;
+
+	bool b_win8_above = true;		//win8及以上版本
+	// WIN8及以上版本使用
 	std::shared_ptr<sc::ScreenCapture> capture_;
+	// WIN7及以下版本以下使用
+	WIN7_CAPTURE_SCREEN_T win7_capture_;
+
 	bool is_initialized_ = false;
 	uint32_t frame_rate_ = 15;
 	uint32_t width_ = 0;

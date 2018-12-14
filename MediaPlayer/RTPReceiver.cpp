@@ -115,6 +115,7 @@ void RTPReceiver::Run(void)
 				{
 					if (pack->GetPayloadType() == RTP_PAYLOAD_TYPE_H264) //H264
 					{
+						//pack->GetPayloadData(); // ²»°üÀ¨rtp header
 						std::vector<RTP_H264_FRAM_T> rtp_h264_frames;
 						if(h264_rtp_unpack_->RTPH264UnpackInput(rtp_h264_frames,
 							pack->GetPacketData(), pack->GetPacketLength()) == 1)

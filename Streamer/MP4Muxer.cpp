@@ -98,8 +98,6 @@ bool MP4Muxer::WriteH264Data(const uint8_t * data, int size, uint64_t timestamp)
 	NaluUnit nalu;
 	int pos = 0, len = 0;
 
-	static int frame_count = 0;
-
 	if(readNaluFromBuf(data, size, nalu))
 	{
 		// 添加h264 track     
@@ -126,14 +124,14 @@ bool MP4Muxer::WriteH264Data(const uint8_t * data, int size, uint64_t timestamp)
 		if (nalu.type == 0x07) // sps    			// 不加SPS PPS在mediaplayer不能正常播放
 		{
 			MP4AddH264SequenceParameterSet(mp4_handle_, video_track_id_, nalu.data, nalu.size);
-			LogDebug("frame_count = %d, sps frame, len = %d\n",  frame_count, nalu.size);
+			LogDebug("sps frame, len = %d\n",  nalu.size);
 			sps_.clear();
 			sps_.append(nalu.data, nalu.data+nalu.size);
 		}
 		else if (nalu.type == 0x08) // pps    
 		{
 			MP4AddH264PictureParameterSet(mp4_handle_, video_track_id_, nalu.data, nalu.size);
-			LogDebug("frame_count = %d, pps frame, len = %d\n", frame_count, nalu.size);
+			LogDebug("pps frame, len = %d\n", nalu.size);
 			pps_.clear();
 			pps_.append(nalu.data, nalu.data+nalu.size);
 		}

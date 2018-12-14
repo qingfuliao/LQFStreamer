@@ -30,7 +30,7 @@ void CleanupSockets()
 
 
 extern int simple_player_test(int argc, char *argv[]);
-extern int RTP_PlayerTest(int argc, char *argv[]);
+extern int RTP_H264_Receiver_Test(int argc, char *argv[]);
 extern int RTP_AAC_Receiver_Test(int argc, char *argv[]);
 #undef main
 int main(int argc, char *argv[])
@@ -43,50 +43,18 @@ int main(int argc, char *argv[])
 // 	{
 // 		printf("simple_player_test failed\n");
 // 	}
-// 	if (RTP_PlayerTest(argc, argv) < 0)
+// 	if (RTP_H264_Receiver_Test(argc, argv) < 0)//
 // 	{
 // 		printf("RTP_PlayerTest failed\n");
 // 	}
 	if (RTP_AAC_Receiver_Test(argc, argv)< 0)
 	{
-			printf("RTP_AAC_Receiver_Test failed\n");
+		printf("RTP_AAC_Receiver_Test failed\n");
 	}
 	LogDeinit();
 	CleanupSockets();
 
 	system("pause");
 	
-	return 0;
-}
-
-
-union test
-{
-	int a;
-	char b : 1;
-	char c : 7;	// 小端的时候，对于bit操作，高位仍然在高位
-};
-
-int endian_test(void)
-{
-	union test t1;
-	t1.a = 1;
-	return t1.c;
-}
-
-int main2(void)
-{
-	int i = endian_test();
-	if (i == 1)
-	{
-		printf("is little endian.\n");
-	}
-	else
-	{
-		printf("is big endian.\n");
-	}
-
-	printf("i = %d.\n", i);
-	system("pause");
 	return 0;
 }

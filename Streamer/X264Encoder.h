@@ -146,6 +146,9 @@ private:
 	std::string sps_;
 	std::string pps_;
 	std::string sei_;
+
+	FILE *yuv_file = NULL;
+	bool b_yuv_data_debug = false;
 };
 #endif
 

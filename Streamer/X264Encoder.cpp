@@ -152,6 +152,10 @@ int X264Encoder::Init(VideoEncoderConfig &encoder_config)
 	pic_in_.img.i_stride[1] = width_ / 2;	// 宽度一半 由YUV420格式决定的
 	pic_in_.img.i_stride[2] = width_ / 2; // 宽度一半
 #endif
+	if (b_yuv_data_debug)
+	{
+		yuv_file = fopen("record.yuv", "wb+");
+	}
 	return 0;
 }
 
@@ -167,6 +171,11 @@ void X264Encoder::Deinit()
 		//如果不x264_picture_alloc则也不用x264_picture_clean
 		x264_picture_clean(&pic_in_);
 	#endif
+	}
+
+	if (b_yuv_data_debug && yuv_file)
+	{
+		fclose(yuv_file);
 	}
 }
 
@@ -185,11 +194,13 @@ int X264Encoder::EncodeFrame(MediaPacket * pkt, const MediaFrame * frame)
 		memcpy(pic_in_.img.plane[1], frame->data[1], x4->chroma_size);
 		memcpy(pic_in_.img.plane[2], frame->data[2], x4->chroma_size);
 #else
+		
 		for (i = 0; i < pic_in_.img.i_plane; i++)
 		{
 			pic_in_.img.plane[i] = frame->data[i];
-		}
-		
+			if(b_yuv_data_debug && yuv_file)
+				fwrite(frame->data[i], frame->linesize[i], 1, yuv_file);
+		}	
 #endif
 
 		pic_in_.i_pts = frame->pts;

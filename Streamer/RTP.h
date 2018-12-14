@@ -88,3 +88,16 @@ typedef struct rtp_connect_param
 	bool			enable_rtp_send;
 	bool			enable_rtp_recv;
 }RTP_CONNECT_PARAM_T;
+
+typedef struct _rtp_header_t
+{
+	uint32_t v : 2;		/* protocol version */
+	uint32_t p : 1;		/* padding flag */
+	uint32_t x : 1;		/* header extension flag */
+	uint32_t cc : 4;	/* CSRC count */
+	uint32_t m : 1;		/* marker bit */
+	uint32_t pt : 7;	/* payload type */
+	uint32_t seq : 16;	/* sequence number */
+	uint32_t timestamp; /* timestamp */
+	uint32_t ssrc;		/* synchronization source */
+} RTP_HEADER_T;

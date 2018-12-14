@@ -61,7 +61,8 @@ bool RTPStream::Init(RTP_CONNECT_PARAM_T & video_param,
 	checkerror(status);
 
 	// 设置RTP会话默认参数
-	jrtp_sess_video_.SetDefaultTimestampIncrement(1000 / 15.0);/* 设置时间戳增加间隔 */
+	jrtp_sess_video_.SetTimestampUnit(video_param.timestamp_unit);
+	jrtp_sess_video_.SetDefaultTimestampIncrement(65);/* 设置时间戳增加间隔 */
 	jrtp_sess_video_.SetDefaultPayloadType(video_param.payload_type);
 	jrtp_sess_video_.SetDefaultMark(false);
 
@@ -215,7 +216,13 @@ void RTPStream::Run(void)
 								if (p_frame_buf != NULL && frame_len > 12)
 								{
 									//status = jrtp_sess_video_.SendPacket((void *)p_frame_buf, frame_len);
-									status = jrtp_sess_video_.SendRawData((void *)p_frame_buf, frame_len, true);
+									RTP_HDR_T rtp_header;
+									memcpy(&rtp_header, p_frame_buf, 12);
+									status = jrtp_sess_video_.SendPacketEx((void *)(p_frame_buf + 12), 
+										frame_len - 12, 
+										rtp_header.payloadtype, rtp_header.marker, 65,0, NULL, 0);
+									//status = jrtp_sess_video_.SendRTPData((void *)p_frame_buf, frame_len,);
+
 									if(status < 0)
 										LogError("ERROR: %s", RTPGetErrorString(status).c_str());
 								}
@@ -229,8 +236,8 @@ void RTPStream::Run(void)
 					}
 					if (nal_type == 0x65) // 计算每次发I帧的耗时，发送I帧时容易拥塞丢帧
 					{
-						LogDebug("send I frame size:%d, need time :%llu, timestamp:%u", h264_len,
-							LQF::AVTimer::GetInstance()->GetTime() - cur_time, rtp_pkt.timestamp);
+						LogDebug("send I frame size:%d, need time :%llu", h264_len,
+							LQF::AVTimer::GetInstance()->GetTime() - cur_time);
 					}
 				}	
 				else

@@ -394,7 +394,9 @@ void MediaCenter::PushVideo()
 				// 确定是否需要插入sps/pps/sei
 				if (MD_PICTURE_TYPE_I == packet.pkt_type
 					|| MD_PICTURE_TYPE_IDR == packet.pkt_type)
+// 				if(b_trigger_sps_pps)
 				{
+					b_trigger_sps_pps = false;
 					LogDebug("pushVideoMetadata");
 					pushVideoMetadata();
 				}

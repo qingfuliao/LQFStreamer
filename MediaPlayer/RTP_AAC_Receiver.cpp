@@ -16,7 +16,7 @@ extern "C"
 
 #define PORT_AUDIO_LATENCY  (0.1);  // 0.1秒，也就是说PortAudio库需要累积0.1秒的数据后才真正播放
 
-
+// 音频播放 音频录制 PortAudio
 typedef struct audio_param
 {
 	PaStreamParameters *output_parameters;
@@ -26,7 +26,7 @@ typedef struct audio_param
 
 	AVFrame want_frame;			// 指定PortAudio输出格式
 	int quit;                   // 是否退出线程
-	SwrContext	*swr_ctx;        // 音频PCM格式转换
+	SwrContext	*swr_ctx;       // 音频PCM格式转换
 	int sample_size;			// 一个sample占用的字节（多个通道）
 }AUDIO_PARAM_T;
 
@@ -246,7 +246,7 @@ send_packet_again:
 				// 转换为PortAudio输出需要的数据格式
 				nb_samples = swr_convert(s_audio_param.swr_ctx,
 					&audio_sample_buf,
-					AVCODE_MAX_AUDIO_FRAME_SIZE / s_audio_param.sample_size,
+					1024/2,//AVCODE_MAX_AUDIO_FRAME_SIZE / s_audio_param.sample_size,
 					(const uint8_t * *)pFrame->data,
 					pFrame->nb_samples);
 

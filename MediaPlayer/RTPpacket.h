@@ -6,7 +6,7 @@
 
 typedef struct _rtp_packet
 {
-	rtp_header_t rtp;
+	RTP_HEADER_T rtp;
 	uint32_t csrc[16];
 	const void* extension; // extension(valid only if rtp.x = 1)
 	uint16_t extlen; // extension length in bytes

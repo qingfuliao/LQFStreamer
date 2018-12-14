@@ -44,7 +44,7 @@ static int frameRefreshThread(void *arg)
 }
 
 
-int RTP_PlayerTest(int argc, char *argv[])
+int RTP_H264_Receiver_Test(int argc, char *argv[])
 {
 	RTPReceiver rtp_receiver(10);
 	RTP_CONNECT_PARAM_T connect_param;

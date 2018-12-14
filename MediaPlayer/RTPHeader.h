@@ -15,7 +15,7 @@ typedef struct _rtp_header_t
 	uint32_t seq : 16;	/* sequence number */
 	uint32_t timestamp; /* timestamp */
 	uint32_t ssrc;		/* synchronization source */
-} rtp_header_t;
+} RTP_HEADER_T;
 
 #define RTP_V(v)	((v >> 30) & 0x03) /* protocol version */
 #define RTP_P(v)	((v >> 29) & 0x01) /* padding flag */
