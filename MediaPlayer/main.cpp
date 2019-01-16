@@ -33,7 +33,7 @@ extern int simple_player_test(int argc, char *argv[]);
 extern int RTP_H264_Receiver_Test(int argc, char *argv[]);
 extern int RTP_AAC_Receiver_Test(int argc, char *argv[]);
 #undef main
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
 	LogInit("rtp.txt");
 	InitSockets();
@@ -56,5 +56,14 @@ int main(int argc, char *argv[])
 
 	system("pause");
 	
+	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	
+
+	system("pause");
+
 	return 0;
 }

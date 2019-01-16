@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QTMediaPlayerClass</class>
+ <widget class="QMainWindow" name="QTMediaPlayerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1104</width>
+    <height>709</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QTMediaPlayer</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>1101</width>
+      <height>696</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="VideoWidget" name="openGLWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>600</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="bottomWidget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 0, 0);</string>
+       </property>
+       <widget class="QWidget" name="bottomTopwidget" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1101</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(31, 31, 31);</string>
+        </property>
+        <widget class="QSlider" name="progressSlider">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>0</y>
+           <width>1011</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="showListButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>0</y>
+           <width>26</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>26</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="fasterButton">
+         <property name="geometry">
+          <rect>
+           <x>1060</x>
+           <y>0</y>
+           <width>26</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>24</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>26</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="bottomBottomwidget" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>1012</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <widget class="QWidget" name="bottomBottomLeftWidget" native="true">
+         <property name="geometry">
+          <rect>
+           <x>1</x>
+           <y>0</y>
+           <width>220</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <widget class="QPushButton" name="stopButton">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="nextButton">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="previousButton">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="playButton">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>4</y>
+            <width>32</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="bottomBottomCenterWidget" native="true">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>0</y>
+           <width>321</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>34</height>
+          </size>
+         </property>
+         <widget class="QLabel" name="timeLabel">
+          <property name="geometry">
+           <rect>
+            <x>5</x>
+            <y>10</y>
+            <width>161</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>00:00:00/00:00:00</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="volumeButton">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>10</y>
+            <width>21</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QSlider" name="volumeSlider">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>10</y>
+            <width>101</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(29, 255, 63);
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));</string>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="bottomBottomRightWidget" native="true">
+         <property name="geometry">
+          <rect>
+           <x>761</x>
+           <y>0</y>
+           <width>250</width>
+           <height>40</height>
+          </rect>
+         </property>
+         <widget class="QPushButton" name="modeButton">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="listButton">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="randomButton">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="settingButton">
+          <property name="geometry">
+           <rect>
+            <x>80</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="fullScreenButton">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>7</y>
+            <width>26</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>26</width>
+            <height>26</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+    <zorder>bottomWidget</zorder>
+    <zorder>openGLWidget</zorder>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1104</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMedia">
+    <property name="title">
+     <string>媒体</string>
+    </property>
+    <addaction name="actionOpenFIle"/>
+    <addaction name="actionOpenUrl"/>
+   </widget>
+   <widget class="QMenu" name="menuPlay">
+    <property name="title">
+     <string>播放</string>
+    </property>
+    <addaction name="actionPlayPause"/>
+    <addaction name="actionStop"/>
+   </widget>
+   <addaction name="menuMedia"/>
+   <addaction name="menuPlay"/>
+  </widget>
+  <action name="actionOpenFIle">
+   <property name="text">
+    <string>打开文件</string>
+   </property>
+  </action>
+  <action name="actionOpenUrl">
+   <property name="text">
+    <string>打开串流</string>
+   </property>
+  </action>
+  <action name="actionPlayPause">
+   <property name="text">
+    <string>播放</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="text">
+    <string>停止</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>VideoWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>videowidget.h</header>
+   <slots>
+    <slot>slotStop()</slot>
+    <slot>slotPlayOrPause()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="QTMediaPlayer.qrc"/>
+  <include location="Resource.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>playButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotPlayOrPause()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>22</x>
+     <y>680</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>563</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stopButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotStop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>681</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotSeekProgress()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>276</x>
+     <y>647</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>progressSlider</sender>
+   <signal>sliderPressed()</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotProgressPress()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>648</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>289</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>showListButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotSlow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>17</x>
+     <y>650</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-27</x>
+     <y>500</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fasterButton</sender>
+   <signal>clicked()</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotFast()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>989</x>
+     <y>652</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1186</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>volumeSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>QTMediaPlayerClass</receiver>
+   <slot>slotVolume(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>522</x>
+     <y>682</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1191</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slotPlayOrPause()</slot>
+  <slot>slotStop()</slot>
+  <slot>setProgressValue(int)</slot>
+  <slot>slotSeekProgress(int)</slot>
+  <slot>slotSeekProgress()</slot>
+  <slot>slotProgressPress()</slot>
+  <slot>slotSlow(int)</slot>
+  <slot>slotFast()</slot>
+  <slot>slotVolume(int)</slot>
+ </slots>
+</ui>

@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{79bd95c1-90e7-4e41-a06e-aeefb80ffb9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{7605764d-aff1-4457-981c-30bd96b40f77}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QTMediaPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Decoder.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\FrameQueue.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\PacketQueue.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\AudioOutput.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Clock.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Demuxer.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\MediaPlayer.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\VideoOutput.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\sonic.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\DecodeThread.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\AsyncTaskThread.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\logger.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\WorkThreadPool.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\util.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\File.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\uv_errno.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QTMediaPlayer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="VideoWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="QTMediaPlayer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="QTMediaPlayer.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="Resource.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlayerStyleSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Decoder.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\FrameQueue.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Media.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PacketQueue.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Ringbuffer.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\AudioOutput.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Clock.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Demuxer.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\MediaPlayer.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\VideoOutput.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\sonic.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\DecodeThread.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\PlayerInfo.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\AsyncTaskThread.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\List.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\logger.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\semaphore.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\TaskExecutor.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\TaskQueue.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\threadgroup.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\ThreadPool.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\WorkThreadPool.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\util.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\File.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\onceToken.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\uv_errno.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\TimeTicker.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>

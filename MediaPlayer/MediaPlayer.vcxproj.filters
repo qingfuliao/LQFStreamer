@@ -111,4 +111,8 @@
       <Filter>rtp</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="HomeWidget.ui" />
+    <None Include="MainWindow.ui" />
+  </ItemGroup>
 </Project>

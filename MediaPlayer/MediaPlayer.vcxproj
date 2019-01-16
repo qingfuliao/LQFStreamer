@@ -148,6 +148,10 @@
     <ClInclude Include="Thread.h" />
     <ClInclude Include="RTPHeader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="HomeWidget.ui" />
+    <None Include="MainWindow.ui" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
