@@ -51,7 +51,7 @@ private:
 	int volume_max_value_ = 20;
 	QString total_time_;	// 完整的时间长度
 	QString cur_time_;		// 当前时间
-	std::string url_ = "test.mp4";			// 打开文件链接
+	std::string url_ = "shahai45.mp4";			// 打开文件链接
 	bool is_progress_press_ = false;
 	float volume_default_ratio_ = 0.5; // 范围从0~1.0 对应最小~最大声音
 };

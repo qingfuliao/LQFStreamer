@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="ZLToolKit">
+      <UniqueIdentifier>{0ae29c47-14f0-4e87-9b90-772cad1577aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLToolKit\Network">
+      <UniqueIdentifier>{bdc5a9e7-9aba-4b77-b4fe-53f055b8726a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLToolKit\Poller">
+      <UniqueIdentifier>{adc951d8-f4d9-4408-a107-642d25cf9a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLToolKit\Thread">
+      <UniqueIdentifier>{82c45492-4b1f-493a-8a7e-11672b5c442f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLToolKit\Util">
+      <UniqueIdentifier>{0d5251a8-08f2-4a7c-b7ad-3961a70cd9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLToolKit\win32">
+      <UniqueIdentifier>{c1d0888b-b72b-4b68-b283-239af98faa19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit">
+      <UniqueIdentifier>{5ac93d7c-b4de-4748-93d1-6b3dd9b6a222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Codec">
+      <UniqueIdentifier>{04fd52ce-497d-48aa-849a-cbbea28591bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Common">
+      <UniqueIdentifier>{a7d97802-a5d1-4fd4-8a83-d925af1c54eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Extension">
+      <UniqueIdentifier>{ce0081b0-ae8c-4bf3-b39b-dd04a8d3c57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\H264">
+      <UniqueIdentifier>{55dee006-7522-41b5-b067-9c143d507802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Http">
+      <UniqueIdentifier>{20e708ef-fb03-4fa1-8f60-0ed3e5f99287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\MediaFile">
+      <UniqueIdentifier>{faf85d8c-f937-45b6-89df-079a4321b055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Player">
+      <UniqueIdentifier>{98e4abc2-fe24-4952-a76f-28513b1b9fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Rtmp">
+      <UniqueIdentifier>{7f8032d7-7bac-4ff9-a352-6fd747b4706e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\RtmpMuxer">
+      <UniqueIdentifier>{dd0e2419-3039-4e64-b209-22550c6ba0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Rtsp">
+      <UniqueIdentifier>{aaf3b8cf-c57a-4ce2-ab1f-5afbe8969d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\RtspMuxer">
+      <UniqueIdentifier>{3179b668-17a6-4ecf-9334-f0db803c764e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZLMediaKit\Shell">
+      <UniqueIdentifier>{bc38100f-7ee3-434f-a2b5-241c9f4266d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QTStreamer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QGeneralWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QVideoListWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QAdvancedWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Network\Socket.cpp">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Network\sockutil.cpp">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Network\TcpClient.cpp">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Network\TcpServer.cpp">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Network\TcpSession.cpp">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Poller\EventPoller.cpp">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Poller\Pipe.cpp">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Poller\PipeWrap.cpp">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Poller\SelectWrap.cpp">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Poller\Timer.cpp">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Thread\AsyncTaskThread.cpp">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Thread\WorkThreadPool.cpp">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\base64.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\CMD.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\File.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\logger.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\MD5.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\mini.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\NoticeCenter.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\SHA1.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\SqlPool.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\SSLBox.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\util.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\Util\uv_errno.cpp">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLToolKit\src\win32\getopt.c">
+      <Filter>ZLToolKit\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Codec\AACEncoder.cpp">
+      <Filter>ZLMediaKit\Codec</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Codec\H264Encoder.cpp">
+      <Filter>ZLMediaKit\Codec</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Common\config.cpp">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Common\Device.cpp">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Common\MediaSink.cpp">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Common\MediaSource.cpp">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Extension\AAC.cpp">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Extension\Factory.cpp">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Extension\H264.cpp">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Extension\H265.cpp">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\H264\h264_bit_reader.cpp">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\H264\h264_parser.cpp">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\H264\h264_poc.cpp">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\H264\H264Parser.cpp">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\H264\SPSParser.c">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpChunkedSplitter.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpClient.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpClientImp.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpCookie.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpDownloader.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpRequester.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpRequestSplitter.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\HttpSession.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\strCoding.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Http\WebSocketSplitter.cpp">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\MediaFile\crc32.cpp">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\MediaFile\HLSMaker.cpp">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\MediaFile\MediaReader.cpp">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\MediaFile\MediaRecorder.cpp">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\MediaFile\Mp4Maker.cpp">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\MediaFile\TSMaker.cpp">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Shell\ShellCMD.cpp">
+      <Filter>ZLMediaKit\Shell</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Shell\ShellSession.cpp">
+      <Filter>ZLMediaKit\Shell</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\AACRtpCodec.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\H264RtpCodec.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\H265RtpCodec.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtpCodec.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtspDemuxer.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtspMuxer.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtspSdp.cpp">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtpBroadCaster.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtpReceiver.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\Rtsp.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtspPlayer.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtspSession.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtspSplitter.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtsp\UDPServer.cpp">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\AACRtmpCodec.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\FlvMuxer.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\H264RtmpCodec.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpCodec.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpDemuxer.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpMetedata.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpMuxer.cpp">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtmp\amf.cpp">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpPlayer.cpp">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpProtocol.cpp">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpPusher.cpp">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpSession.cpp">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Rtmp\utils.cpp">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Player\MediaPlayer.cpp">
+      <Filter>ZLMediaKit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Player\PlayerBase.cpp">
+      <Filter>ZLMediaKit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ZLMediaKit\src\Player\PlayerProxy.cpp">
+      <Filter>ZLMediaKit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="test_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QTStreamer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QGeneralWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QVideoListWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QAdvancedWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="QTStreamer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="GeneralWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="VideoListWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AdvancedWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="QTStreamer.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QTStreamer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ZLToolKit\src\Network\Socket.h">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Network\sockutil.h">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Network\TcpClient.h">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Network\TcpServer.h">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Network\TcpSession.h">
+      <Filter>ZLToolKit\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Poller\EventPoller.h">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Poller\Pipe.h">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Poller\PipeWrap.h">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Poller\SelectWrap.h">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Poller\Timer.h">
+      <Filter>ZLToolKit\Poller</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\AsyncTaskThread.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\List.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\semaphore.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\TaskExecutor.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\TaskQueue.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\threadgroup.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\ThreadPool.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Thread\WorkThreadPool.h">
+      <Filter>ZLToolKit\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\base64.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\CMD.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\File.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\function_traits.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\logger.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\MD5.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\mini.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\NoticeCenter.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\onceToken.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\ResourcePool.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\RingBuffer.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\SHA1.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\SqlConnection.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\SqlPool.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\SSLBox.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\TimeTicker.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\util.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\Util\uv_errno.h">
+      <Filter>ZLToolKit\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\win32\getopt.h">
+      <Filter>ZLToolKit\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLToolKit\src\win32\tailor.h">
+      <Filter>ZLToolKit\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Codec\AACEncoder.h">
+      <Filter>ZLMediaKit\Codec</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Codec\H264Encoder.h">
+      <Filter>ZLMediaKit\Codec</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Common\config.h">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Common\Device.h">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Common\MediaSink.h">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Common\MediaSource.h">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Common\MultiMediaSourceMuxer.h">
+      <Filter>ZLMediaKit\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Extension\AAC.h">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Extension\Factory.h">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Extension\Frame.h">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Extension\H264.h">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Extension\H265.h">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Extension\Track.h">
+      <Filter>ZLMediaKit\Extension</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\h264_bit_reader.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\h264_parser.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\h264_poc.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\H264Parser.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\macros.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\ranges.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\H264\SPSParser.h">
+      <Filter>ZLMediaKit\H264</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpChunkedSplitter.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpClient.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpClientImp.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpCookie.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpDownloader.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpRequester.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpRequestSplitter.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\HttpSession.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\strCoding.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\strptime_win.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\WebSocketSession.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Http\WebSocketSplitter.h">
+      <Filter>ZLMediaKit\Http</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\MediaFile\crc32.h">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\MediaFile\HLSMaker.h">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\MediaFile\MediaReader.h">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\MediaFile\MediaRecorder.h">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\MediaFile\Mp4Maker.h">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\MediaFile\TSMaker.h">
+      <Filter>ZLMediaKit\MediaFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Shell\ShellSession.h">
+      <Filter>ZLMediaKit\Shell</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\AACRtpCodec.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\H264RtpCodec.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\H265RtpCodec.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtpCodec.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspDemuxer.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspMediaSourceMuxer.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspMuxer.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspSdp.h">
+      <Filter>ZLMediaKit\RtspMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtpBroadCaster.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtpReceiver.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\Rtsp.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspMediaSource.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspPlayer.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspPlayerImp.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspSession.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspSplitter.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspToRtmpMediaSource.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtsp\UDPServer.h">
+      <Filter>ZLMediaKit\Rtsp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\AACRtmpCodec.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\FlvMuxer.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\H264RtmpCodec.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpCodec.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpDemuxer.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpMediaSourceMuxer.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpMetedata.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpMuxer.h">
+      <Filter>ZLMediaKit\RtmpMuxer</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\amf.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\Rtmp.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpMediaSource.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpPlayer.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpPlayerImp.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpProtocol.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpPusher.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpSession.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpToRtspMediaSource.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Rtmp\utils.h">
+      <Filter>ZLMediaKit\Rtmp</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Player\MediaPlayer.h">
+      <Filter>ZLMediaKit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Player\PlayerBase.h">
+      <Filter>ZLMediaKit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ZLMediaKit\src\Player\PlayerProxy.h">
+      <Filter>ZLMediaKit\Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ZLToolKit\src\Network\Socket_ios.mm">
+      <Filter>ZLToolKit\Network</Filter>
+    </None>
+  </ItemGroup>
+</Project>

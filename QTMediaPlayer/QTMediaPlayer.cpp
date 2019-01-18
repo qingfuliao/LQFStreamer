@@ -132,7 +132,7 @@ void QTMediaPlayer::slotFast()
 void QTMediaPlayer::slotVolume(int pos)
 {
 	float percent = 1.0*pos / volume_max_value_;
-	player_->updateVolumeCommand(percent);
+	player_->AdjustVolumeCommand(percent);
 }
 
 void QTMediaPlayer::HandlePlayerEvent(PlayerEvent e, void * param)
@@ -238,7 +238,7 @@ void QTMediaPlayer::initUI()
 void QTMediaPlayer::initPlayer()
 {
 	ui.volumeSlider->setValue(volume_max_value_ * volume_default_ratio_);
-	player_->updateVolumeCommand(volume_default_ratio_);
+	player_->AdjustVolumeCommand(volume_default_ratio_);
 }
 
 void QTMediaPlayer::handlePlay()

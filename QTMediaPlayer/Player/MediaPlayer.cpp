@@ -560,7 +560,7 @@ int MediaPlayer::read_thread()
 			av_packet_unref(packet);
 		}
 	}
-
+// 	av_packet_free(&packet);
 	return 0;
 failed:
 	// «Î«Ûπÿ±’≥Ã–Ú
@@ -789,7 +789,7 @@ bool MediaPlayer::DecelerateCommand()
 	return true;
 }
 
-bool MediaPlayer::updateVolumeCommand(float ratio)
+bool MediaPlayer::AdjustVolumeCommand(float ratio)
 {
 	audio_volume = 100 * ratio;
 	return true;

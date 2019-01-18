@@ -192,7 +192,6 @@ void RtmpPusher::Run()
 			if (!RTMP_SendPacket(rtmp_handle_, &rtmp_packet, 0))
 			{
 				LogError("fail to send rtmp_packet");
-
 			}
 		}
 		if(!b_get_packet)			// 如果音视频队列都为空则休眠

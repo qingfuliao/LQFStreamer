@@ -150,7 +150,7 @@ int video_thread(void *arg)
 		AVRational rational = { frame_rate.den, frame_rate.num };
 		duration = (frame_rate.num && frame_rate.den ? av_q2d(rational) : 0);
 		pts = (frame->pts == AV_NOPTS_VALUE) ? NAN : frame->pts * av_q2d(tb);
-// 		DebugL << "vpts = " << pts;
+ 		DebugL << "vpts = " << pts;
 		// duration和pts都是秒的单位
 		ret = queue_picture(is, frame, pts, duration, frame->pkt_pos, is->viddec->pkt_serial);
 		av_frame_unref(frame);
@@ -191,7 +191,7 @@ int audio_thread(void *arg)
 				goto the_end;
 			}
 			af->pts = (frame->pts == AV_NOPTS_VALUE) ? NAN : frame->pts * av_q2d(tb);
-// 			DebugL << "apts = " << af->pts;
+			DebugL << "apts = " << af->pts;
 			af->pos = frame->pkt_pos;
 			af->serial = is->auddec->pkt_serial;
 			AVRational rational = { frame->nb_samples, frame->sample_rate };

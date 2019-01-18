@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <Keyword>Qt4VSv1.0</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;ZLToolKit\src;ZLMediaKit\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;ZLToolKit\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;ZLToolKit\src;ZLMediaKit\src;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <QtMoc>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+    </QtUic>
+    <QtRcc>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+    </QtRcc>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="QAdvancedWidget.cpp" />
+    <ClCompile Include="QGeneralWidget.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="QTStreamer.cpp" />
+    <ClCompile Include="QVideoListWidget.cpp" />
+    <ClCompile Include="test_server.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Codec\AACEncoder.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Codec\H264Encoder.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Common\config.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Common\Device.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Common\MediaSink.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Common\MediaSource.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Extension\AAC.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Extension\Factory.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Extension\H264.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Extension\H265.cpp" />
+    <ClCompile Include="ZLMediaKit\src\H264\H264Parser.cpp" />
+    <ClCompile Include="ZLMediaKit\src\H264\h264_bit_reader.cpp" />
+    <ClCompile Include="ZLMediaKit\src\H264\h264_parser.cpp" />
+    <ClCompile Include="ZLMediaKit\src\H264\h264_poc.cpp" />
+    <ClCompile Include="ZLMediaKit\src\H264\SPSParser.c" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpChunkedSplitter.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpClient.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpClientImp.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpCookie.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpDownloader.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpRequester.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpRequestSplitter.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\HttpSession.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\strCoding.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Http\WebSocketSplitter.cpp" />
+    <ClCompile Include="ZLMediaKit\src\MediaFile\crc32.cpp" />
+    <ClCompile Include="ZLMediaKit\src\MediaFile\HLSMaker.cpp" />
+    <ClCompile Include="ZLMediaKit\src\MediaFile\MediaReader.cpp" />
+    <ClCompile Include="ZLMediaKit\src\MediaFile\MediaRecorder.cpp" />
+    <ClCompile Include="ZLMediaKit\src\MediaFile\Mp4Maker.cpp" />
+    <ClCompile Include="ZLMediaKit\src\MediaFile\TSMaker.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Player\MediaPlayer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Player\PlayerBase.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Player\PlayerProxy.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\AACRtmpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\FlvMuxer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\H264RtmpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpDemuxer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpMetedata.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtmpMuxer\RtmpMuxer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtmp\amf.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpPlayer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpProtocol.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpPusher.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtmp\RtmpSession.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtmp\utils.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\AACRtpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\H264RtpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\H265RtpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtpCodec.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtspDemuxer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtspMuxer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\RtspMuxer\RtspSdp.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtpBroadCaster.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtpReceiver.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\Rtsp.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtspPlayer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtspSession.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\RtspSplitter.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Rtsp\UDPServer.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Shell\ShellCMD.cpp" />
+    <ClCompile Include="ZLMediaKit\src\Shell\ShellSession.cpp" />
+    <ClCompile Include="ZLToolKit\src\Network\Socket.cpp" />
+    <ClCompile Include="ZLToolKit\src\Network\sockutil.cpp" />
+    <ClCompile Include="ZLToolKit\src\Network\TcpClient.cpp" />
+    <ClCompile Include="ZLToolKit\src\Network\TcpServer.cpp" />
+    <ClCompile Include="ZLToolKit\src\Network\TcpSession.cpp" />
+    <ClCompile Include="ZLToolKit\src\Poller\EventPoller.cpp" />
+    <ClCompile Include="ZLToolKit\src\Poller\Pipe.cpp" />
+    <ClCompile Include="ZLToolKit\src\Poller\PipeWrap.cpp" />
+    <ClCompile Include="ZLToolKit\src\Poller\SelectWrap.cpp" />
+    <ClCompile Include="ZLToolKit\src\Poller\Timer.cpp" />
+    <ClCompile Include="ZLToolKit\src\Thread\AsyncTaskThread.cpp" />
+    <ClCompile Include="ZLToolKit\src\Thread\WorkThreadPool.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\base64.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\CMD.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\File.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\logger.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\MD5.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\mini.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\NoticeCenter.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\SHA1.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\SqlPool.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\SSLBox.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\util.cpp" />
+    <ClCompile Include="ZLToolKit\src\Util\uv_errno.cpp" />
+    <ClCompile Include="ZLToolKit\src\win32\getopt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QTStreamer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="AdvancedWidget.ui" />
+    <QtUic Include="GeneralWidget.ui" />
+    <QtUic Include="QTStreamer.ui" />
+    <QtUic Include="VideoListWidget.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="QTStreamer.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QTStreamer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QGeneralWidget.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QVideoListWidget.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="QAdvancedWidget.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ZLMediaKit\src\Codec\AACEncoder.h" />
+    <ClInclude Include="ZLMediaKit\src\Codec\H264Encoder.h" />
+    <ClInclude Include="ZLMediaKit\src\Common\config.h" />
+    <ClInclude Include="ZLMediaKit\src\Common\Device.h" />
+    <ClInclude Include="ZLMediaKit\src\Common\MediaSink.h" />
+    <ClInclude Include="ZLMediaKit\src\Common\MediaSource.h" />
+    <ClInclude Include="ZLMediaKit\src\Common\MultiMediaSourceMuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\Extension\AAC.h" />
+    <ClInclude Include="ZLMediaKit\src\Extension\Factory.h" />
+    <ClInclude Include="ZLMediaKit\src\Extension\Frame.h" />
+    <ClInclude Include="ZLMediaKit\src\Extension\H264.h" />
+    <ClInclude Include="ZLMediaKit\src\Extension\H265.h" />
+    <ClInclude Include="ZLMediaKit\src\Extension\Track.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\H264Parser.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\h264_bit_reader.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\h264_parser.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\h264_poc.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\macros.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\ranges.h" />
+    <ClInclude Include="ZLMediaKit\src\H264\SPSParser.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpChunkedSplitter.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpClient.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpClientImp.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpCookie.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpDownloader.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpRequester.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpRequestSplitter.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\HttpSession.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\strCoding.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\strptime_win.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\WebSocketSession.h" />
+    <ClInclude Include="ZLMediaKit\src\Http\WebSocketSplitter.h" />
+    <ClInclude Include="ZLMediaKit\src\MediaFile\crc32.h" />
+    <ClInclude Include="ZLMediaKit\src\MediaFile\HLSMaker.h" />
+    <ClInclude Include="ZLMediaKit\src\MediaFile\MediaReader.h" />
+    <ClInclude Include="ZLMediaKit\src\MediaFile\MediaRecorder.h" />
+    <ClInclude Include="ZLMediaKit\src\MediaFile\Mp4Maker.h" />
+    <ClInclude Include="ZLMediaKit\src\MediaFile\TSMaker.h" />
+    <ClInclude Include="ZLMediaKit\src\Player\MediaPlayer.h" />
+    <ClInclude Include="ZLMediaKit\src\Player\PlayerBase.h" />
+    <ClInclude Include="ZLMediaKit\src\Player\PlayerProxy.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\AACRtmpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\FlvMuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\H264RtmpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpDemuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpMediaSourceMuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpMetedata.h" />
+    <ClInclude Include="ZLMediaKit\src\RtmpMuxer\RtmpMuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\amf.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\Rtmp.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpMediaSource.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpPlayer.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpPlayerImp.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpProtocol.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpPusher.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpSession.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\RtmpToRtspMediaSource.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtmp\utils.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\AACRtpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\H264RtpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\H265RtpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtpCodec.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspDemuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspMediaSourceMuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspMuxer.h" />
+    <ClInclude Include="ZLMediaKit\src\RtspMuxer\RtspSdp.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtpBroadCaster.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtpReceiver.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\Rtsp.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspMediaSource.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspPlayer.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspPlayerImp.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspSession.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspSplitter.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\RtspToRtmpMediaSource.h" />
+    <ClInclude Include="ZLMediaKit\src\Rtsp\UDPServer.h" />
+    <ClInclude Include="ZLMediaKit\src\Shell\ShellSession.h" />
+    <ClInclude Include="ZLToolKit\src\Network\Socket.h" />
+    <ClInclude Include="ZLToolKit\src\Network\sockutil.h" />
+    <ClInclude Include="ZLToolKit\src\Network\TcpClient.h" />
+    <ClInclude Include="ZLToolKit\src\Network\TcpServer.h" />
+    <ClInclude Include="ZLToolKit\src\Network\TcpSession.h" />
+    <ClInclude Include="ZLToolKit\src\Poller\EventPoller.h" />
+    <ClInclude Include="ZLToolKit\src\Poller\Pipe.h" />
+    <ClInclude Include="ZLToolKit\src\Poller\PipeWrap.h" />
+    <ClInclude Include="ZLToolKit\src\Poller\SelectWrap.h" />
+    <ClInclude Include="ZLToolKit\src\Poller\Timer.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\AsyncTaskThread.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\List.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\semaphore.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\TaskExecutor.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\TaskQueue.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\threadgroup.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\ThreadPool.h" />
+    <ClInclude Include="ZLToolKit\src\Thread\WorkThreadPool.h" />
+    <ClInclude Include="ZLToolKit\src\Util\base64.h" />
+    <ClInclude Include="ZLToolKit\src\Util\CMD.h" />
+    <ClInclude Include="ZLToolKit\src\Util\File.h" />
+    <ClInclude Include="ZLToolKit\src\Util\function_traits.h" />
+    <ClInclude Include="ZLToolKit\src\Util\logger.h" />
+    <ClInclude Include="ZLToolKit\src\Util\MD5.h" />
+    <ClInclude Include="ZLToolKit\src\Util\mini.h" />
+    <ClInclude Include="ZLToolKit\src\Util\NoticeCenter.h" />
+    <ClInclude Include="ZLToolKit\src\Util\onceToken.h" />
+    <ClInclude Include="ZLToolKit\src\Util\ResourcePool.h" />
+    <ClInclude Include="ZLToolKit\src\Util\RingBuffer.h" />
+    <ClInclude Include="ZLToolKit\src\Util\SHA1.h" />
+    <ClInclude Include="ZLToolKit\src\Util\SqlConnection.h" />
+    <ClInclude Include="ZLToolKit\src\Util\SqlPool.h" />
+    <ClInclude Include="ZLToolKit\src\Util\SSLBox.h" />
+    <ClInclude Include="ZLToolKit\src\Util\TimeTicker.h" />
+    <ClInclude Include="ZLToolKit\src\Util\util.h" />
+    <ClInclude Include="ZLToolKit\src\Util\uv_errno.h" />
+    <ClInclude Include="ZLToolKit\src\win32\getopt.h" />
+    <ClInclude Include="ZLToolKit\src\win32\tailor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ZLToolKit\src\Network\Socket_ios.mm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2015" MocOptions="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

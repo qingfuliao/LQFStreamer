@@ -91,17 +91,18 @@ public:
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
         openGLWidget->setEnabled(true);
         openGLWidget->setMinimumSize(QSize(0, 600));
+        openGLWidget->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
 
         verticalLayout->addWidget(openGLWidget);
 
         bottomWidget = new QWidget(verticalLayoutWidget);
         bottomWidget->setObjectName(QStringLiteral("bottomWidget"));
         bottomWidget->setMinimumSize(QSize(200, 60));
-        bottomWidget->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
+        bottomWidget->setStyleSheet(QStringLiteral("background-color: rgb(10, 10, 10);"));
         bottomTopwidget = new QWidget(bottomWidget);
         bottomTopwidget->setObjectName(QStringLiteral("bottomTopwidget"));
         bottomTopwidget->setGeometry(QRect(0, 0, 1101, 20));
-        bottomTopwidget->setStyleSheet(QStringLiteral("background-color: rgb(31, 31, 31);"));
+        bottomTopwidget->setStyleSheet(QStringLiteral("background-color: rgb(10, 10, 10);"));
         progressSlider = new QSlider(bottomTopwidget);
         progressSlider->setObjectName(QStringLiteral("progressSlider"));
         progressSlider->setGeometry(QRect(40, 0, 1011, 20));

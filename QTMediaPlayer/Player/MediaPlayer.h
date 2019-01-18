@@ -13,7 +13,7 @@ extern "C"
 #include "PlayerInfo.h"
 
 // 播放器核心
-typedef enum MyEnum
+typedef enum player_conmand
 {
 	PLAYER_CMD_PLAY = 0,
 	PLAYER_CMD_STOP,
@@ -125,7 +125,7 @@ public:
 	bool AccelerateCommand();	// 加速播放
 	bool DecelerateCommand();	// 减速播放
 	// ratio范围[0~1.0]
-	bool updateVolumeCommand(float ratio);
+	bool AdjustVolumeCommand(float ratio);
 	float GetCurrentPlaySpeed();
 	PlayerState GetPlayerState();
 	bool IsStoped();
