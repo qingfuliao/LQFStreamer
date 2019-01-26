@@ -1,5 +1,5 @@
-#ifndef _AAC_ENCODER_H_
-#define _AAC_ENCODER_H_
+#ifndef _STREAMER_AAC_ENCODE_H_
+#define _STREAMER_AAC_ENCODE_H_
 
 #include <stdint.h>
 #include <aacenc_lib.h>
@@ -24,10 +24,10 @@ typedef struct AudioEncoderConfig_
 /*
 支持的采样率sample_rate：8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 64000, 88200, 96000
 */
-class AACEncoder
+class AACEncode
 {
 public:
-	AACEncoder();
+	AACEncode();
 	int Init(const int sample_rate, const int channels, const int bit_rate, const int profile_aac);
 	int Encode(const uint8_t * input, const int input_len, uint8_t * output, int &output_len);
 	int GetPcmFrameLength();

@@ -51,26 +51,29 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;ZLToolKit\src;ZLMediaKit\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;ZLToolKit\src;ZLMediaKit\src;Libs\fdk-aac\include;Libs\screen_capture\include;Libs\x264\include;Libs\yuv\include;Libs\portaudio\include;Libs\mp4v2\include;Libs\jrtplib\jrtp;Libs\jrtplib\jthread;Streamer;librtmp\libs\openssl\include;librtmp\libs\zlib-1.2.11\include;librtmp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <SDLCheck>false</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;ZLToolKit\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;ZLToolKit\src;Libs\fdk-aac\lib;Libs\screen_capture\lib\debug;Libs\x264\lib;Libs\yuv\lib;Libs\portaudio\lib\debug;Libs\mp4v2\lib;Libs\jrtplib\jrtp;Libs\jrtplib\jthread;librtmp\libs\zlib-1.2.11\lib;librtmp\libs\openssl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;fdk-aac.lib;zlibstat.lib;libeay32.lib;ssleay32.lib;screencapture.lib;libx264.lib;libyuv.lib;portaudio_static_x86.lib;libmp4v2.lib;Ws2_32.lib;delayimp.lib;Winmm.lib;qwave.lib;jrtplib_d.lib;jthread_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <QtMoc>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
-      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;ZLToolKit\src;ZLMediaKit\src;%(AdditionalIncludeDirectories)</IncludePath>
-      <Define>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</Define>
+      <IncludePath>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;ZLToolKit\src;ZLMediaKit\src;Libs\fdk-aac\include;Libs\screen_capture\include;Libs\x264\include;Libs\yuv\include;Libs\portaudio\include;Libs\mp4v2\include;Libs\jrtplib\jrtp;Libs\jrtplib\jthread;Streamer;librtmp\libs\openssl\include;librtmp\libs\zlib-1.2.11\include;librtmp;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD;%(PreprocessorDefinitions)</Define>
     </QtMoc>
     <QtUic>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
@@ -113,11 +116,37 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="librtmp\librtmp_amf.c" />
+    <ClCompile Include="librtmp\hashswf.c" />
+    <ClCompile Include="librtmp\log.c" />
+    <ClCompile Include="librtmp\parseurl.c" />
+    <ClCompile Include="librtmp\rtmp.c" />
     <ClCompile Include="QAdvancedWidget.cpp" />
     <ClCompile Include="QGeneralWidget.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QTStreamer.cpp" />
     <ClCompile Include="QVideoListWidget.cpp" />
+    <ClCompile Include="Streamer\AACEncode.cpp" />
+    <ClCompile Include="Streamer\AACRTMPPackager.cpp" />
+    <ClCompile Include="Streamer\AudioCapture.cpp" />
+    <ClCompile Include="Streamer\H264RTMPPackager.cpp" />
+    <ClCompile Include="Streamer\LogUtil.cpp" />
+    <ClCompile Include="Streamer\test_streamer.cpp" />
+    <ClCompile Include="Streamer\Media.cpp" />
+    <ClCompile Include="Streamer\MediaCenter.cpp" />
+    <ClCompile Include="Streamer\MP4Muxer.cpp" />
+    <ClCompile Include="Streamer\Pusher.cpp" />
+    <ClCompile Include="Streamer\RecoderPusher.cpp" />
+    <ClCompile Include="Streamer\RtmpPush.cpp" />
+    <ClCompile Include="Streamer\RtpH264Pack.cpp" />
+    <ClCompile Include="Streamer\RTPStream.cpp" />
+    <ClCompile Include="Streamer\RtspPusher.cpp" />
+    <ClCompile Include="Streamer\Thread.cpp" />
+    <ClCompile Include="Streamer\TimerManager.cpp" />
+    <ClCompile Include="Streamer\TimeUtil.cpp" />
+    <ClCompile Include="Streamer\VideoCapture.cpp" />
+    <ClCompile Include="Streamer\X264Encoder.cpp" />
+    <ClCompile Include="test_librtmp_simple_pull.cpp" />
     <ClCompile Include="test_server.cpp" />
     <ClCompile Include="ZLMediaKit\src\Codec\AACEncoder.cpp" />
     <ClCompile Include="ZLMediaKit\src\Codec\H264Encoder.cpp" />
@@ -209,7 +238,12 @@
     <ClCompile Include="ZLToolKit\src\win32\getopt.c" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QTStreamer.h" />
+    <QtMoc Include="QTStreamer.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\ZLToolKit\src;.\ZLMediaKit\src;.\Libs\fdk-aac\include;.\Libs\screen_capture\include;.\Libs\x264\include;.\Libs\yuv\include;.\Libs\portaudio\include;.\Libs\mp4v2\include;.\Libs\jrtplib\jrtp;.\Libs\jrtplib\jthread;.\Streamer;.\librtmp\libs\openssl\include;.\librtmp\libs\zlib-1.2.11\include;.\librtmp</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AdvancedWidget.ui" />
@@ -225,29 +259,62 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QGeneralWidget.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\ZLToolKit\src;.\ZLMediaKit\src;.\Libs\fdk-aac\include;.\Libs\screen_capture\include;.\Libs\x264\include;.\Libs\yuv\include;.\Libs\portaudio\include;.\Libs\mp4v2\include;.\Libs\jrtplib\jrtp;.\Libs\jrtplib\jthread;.\Streamer;.\librtmp\libs\openssl\include;.\librtmp\libs\zlib-1.2.11\include;.\librtmp</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QVideoListWidget.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\ZLToolKit\src;.\ZLMediaKit\src;.\Libs\fdk-aac\include;.\Libs\screen_capture\include;.\Libs\x264\include;.\Libs\yuv\include;.\Libs\portaudio\include;.\Libs\mp4v2\include;.\Libs\jrtplib\jrtp;.\Libs\jrtplib\jthread;.\Streamer;.\librtmp\libs\openssl\include;.\librtmp\libs\zlib-1.2.11\include;.\librtmp</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QAdvancedWidget.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets;.\ZLToolKit\src;.\ZLMediaKit\src;.\Libs\fdk-aac\include;.\Libs\screen_capture\include;.\Libs\x264\include;.\Libs\yuv\include;.\Libs\portaudio\include;.\Libs\mp4v2\include;.\Libs\jrtplib\jrtp;.\Libs\jrtplib\jthread;.\Streamer;.\librtmp\libs\openssl\include;.\librtmp\libs\zlib-1.2.11\include;.\librtmp</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32_LEAN_AND_MEAN;RTP_SUPPORT_THREAD</Define>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="librtmp\librtmp_amf.h" />
+    <ClInclude Include="librtmp\bytes.h" />
+    <ClInclude Include="librtmp\dh.h" />
+    <ClInclude Include="librtmp\dhgroups.h" />
+    <ClInclude Include="librtmp\handshake.h" />
+    <ClInclude Include="librtmp\http.h" />
+    <ClInclude Include="librtmp\log.h" />
+    <ClInclude Include="librtmp\rtmp.h" />
+    <ClInclude Include="librtmp\rtmp_sys.h" />
+    <ClInclude Include="Streamer\AACEncode.h" />
+    <ClInclude Include="Streamer\AACRTMPPackager.h" />
+    <ClInclude Include="Streamer\AudioCapture.h" />
+    <ClInclude Include="Streamer\H264RTMPPackager.h" />
+    <ClInclude Include="Streamer\LogUtil.h" />
+    <ClInclude Include="Streamer\Media.h" />
+    <ClInclude Include="Streamer\MediaCenter.h" />
+    <ClInclude Include="Streamer\MediaInfo.h" />
+    <ClInclude Include="Streamer\MP4Muxer.h" />
+    <ClInclude Include="Streamer\Pusher.h" />
+    <ClInclude Include="Streamer\RecoderPusher.h" />
+    <ClInclude Include="Streamer\LQFRingBuffer.h" />
+    <ClInclude Include="Streamer\RTMPPackager.h" />
+    <ClInclude Include="Streamer\RtmpPush.h" />
+    <ClInclude Include="Streamer\RTP.h" />
+    <ClInclude Include="Streamer\RTPH264Pack.h" />
+    <ClInclude Include="Streamer\RTPPack.h" />
+    <ClInclude Include="Streamer\RTPStream.h" />
+    <ClInclude Include="Streamer\RtspPusher.h" />
+    <ClInclude Include="Streamer\Thread.h" />
+    <ClInclude Include="Streamer\TimerManager.h" />
+    <ClInclude Include="Streamer\TimeUtil.h" />
+    <ClInclude Include="Streamer\VideoCapture.h" />
+    <ClInclude Include="Streamer\X264Encoder.h" />
     <ClInclude Include="ZLMediaKit\src\Codec\AACEncoder.h" />
     <ClInclude Include="ZLMediaKit\src\Codec\H264Encoder.h" />
     <ClInclude Include="ZLMediaKit\src\Common\config.h" />
@@ -364,9 +431,6 @@
     <ClInclude Include="ZLToolKit\src\Util\uv_errno.h" />
     <ClInclude Include="ZLToolKit\src\win32\getopt.h" />
     <ClInclude Include="ZLToolKit\src\win32\tailor.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ZLToolKit\src\Network\Socket_ios.mm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

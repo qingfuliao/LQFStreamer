@@ -3,9 +3,11 @@ visual studio 2015 + QT5.10.1 + WIN10，程序明确编译为32bit debug版本
 # 功能
 1. 屏幕录制
 2. 支持rtmp直播
+3. 源码集成librtmp，便于调试学习
 
 # 改进方向
 -  将转发功能集成到可视界面
+
  
 # 功能测试
 1. 测试码流转发功能，在main函数只调用test_server()函数，自动拉取rtmp://live.hkstv.hk.lxdns.com/live/hks1 码流进行转发，转发后的地址参考test_server.cpp的254行左右
@@ -24,5 +26,8 @@ int main2(int argc, char *argv[])
 	return a.exec();
 }
 ```
+3. 源码集成librtmp，可以断点debug
+测试用例见 test_librtmp_simple_pull.cpp
+
 # 说明
 - 开源库ZLMediaKit和ZLToolKit版权归原作者所有，商用时请联系该作者。

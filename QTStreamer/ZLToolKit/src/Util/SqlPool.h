@@ -24,7 +24,7 @@
 
 #ifndef SQL_SQLPOOL_H_
 #define SQL_SQLPOOL_H_
-
+#if defined(ENABLE_MYSQL)
 #include <deque>
 #include <mutex>
 #include <memory>
@@ -245,5 +245,5 @@ private:
 };
 
 } /* namespace toolkit */
-
+#endif
 #endif /* SQL_SQLPOOL_H_ */

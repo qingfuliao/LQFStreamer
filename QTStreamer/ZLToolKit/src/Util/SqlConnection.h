@@ -24,7 +24,7 @@
 
 #ifndef SQL_SQLCONNECTION_H_
 #define SQL_SQLCONNECTION_H_
-
+#if defined(ENABLE_MYSQL)
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -201,4 +201,5 @@ private:
 };
 
 } /* namespace toolkit */
+#endif
 #endif /* SQL_SQLCONNECTION_H_ */
